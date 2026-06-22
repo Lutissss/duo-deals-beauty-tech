@@ -115,8 +115,8 @@ export default function InquiryCart({
 
               <div className="mt-5 rounded-2xl bg-slate-50 p-4">
                 <p className="text-sm font-semibold text-slate-950">取货方式</p>
-                <div className="mt-3 grid grid-cols-2 gap-2">
-                  {['Sikao life Chinese bbq 自提', 'WashU 附近送货上门'].map((method) => (
+                <div className="mt-3 grid gap-2">
+                  {['WashU 附近线下自提或送货上门'].map((method) => (
                     <button
                       key={method}
                       type="button"

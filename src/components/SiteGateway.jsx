@@ -2,7 +2,7 @@ import { ArrowRight, BadgeCheck, MapPin, PackageCheck, Sparkles, Smartphone } fr
 import beautyHomeImage from '../assets/beauty-home.png';
 import techHomeImage from '../assets/tech-home.png';
 
-const serviceNotes = ['Sikao life Chinese bbq 自提', 'WashU 附近送货上门', '微信确认价格', '现货优先，也支持预订', '商品价格随活动和库存变化'];
+const serviceNotes = ['WashU 附近线下自提或送货上门', '微信确认价格', '现货优先，也支持预订', '商品价格随活动和库存变化'];
 
 const entries = [
   {
@@ -38,7 +38,7 @@ export default function SiteGateway({ onNavigate }) {
             <h1 className="text-3xl font-bold leading-tight text-slate-950">Duo Deals｜美妆数码好价</h1>
             <p className="mt-3 text-lg font-semibold leading-7 text-slate-900">美国本地美妆护肤 & 电子数码好价精选</p>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              美国本地好价选品站，美妆护肤和电子产品分区展示。支持 Sikao life Chinese bbq 自提 / WashU 附近送货上门，价格和库存请微信确认。
+              美国本地好价选品站，美妆护肤和电子产品分区展示。支持 WashU 附近线下自提或送货上门，价格和库存请微信确认。
             </p>
           </div>
         </div>

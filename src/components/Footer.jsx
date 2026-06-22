@@ -1,6 +1,6 @@
 import { AlertCircle } from 'lucide-react';
 
-const serviceNotes = ['Sikao life Chinese bbq 自提', 'WashU 附近送货上门', '微信确认价格', '现货优先，也支持预订', '商品价格随活动和库存变化'];
+const serviceNotes = ['WashU 附近线下自提或送货上门', '微信确认价格', '现货优先，也支持预订', '商品价格随活动和库存变化'];
 
 export default function Footer({ site }) {
   return (

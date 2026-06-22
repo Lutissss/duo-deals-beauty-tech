@@ -15,12 +15,14 @@ const CART_STORAGE_KEY = 'duo-deals-inquiry-cart-v2';
 const PICKUP_STORAGE_KEY = 'duo-deals-pickup-method-v1';
 const LEGACY_CART_STORAGE_KEYS = ['duo-deals-inquiry-cart-v1', 'lewis-inquiry-cart-v1'];
 const LEGACY_PICKUP_STORAGE_KEY = 'lewis-pickup-method-v1';
-const PICKUP_SELF = 'Sikao life Chinese bbq 自提';
+const PICKUP_METHOD = 'WashU 附近线下自提或送货上门';
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '') === '' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const normalizePickupMethod = (method) => {
-  if (method === 'STL 本地送货') return 'WashU 附近送货上门';
-  if (method === 'Sikao 自提') return PICKUP_SELF;
+  if (method === 'STL 本地送货') return PICKUP_METHOD;
+  if (method === 'WashU 附近送货上门') return PICKUP_METHOD;
+  if (method === 'Sikao 自提') return PICKUP_METHOD;
+  if (method === 'Sikao life Chinese bbq 自提') return PICKUP_METHOD;
   return method;
 };
 
@@ -101,7 +103,7 @@ export default function App() {
   const [copied, setCopied] = useState(false);
   const [generatedInquiryText, setGeneratedInquiryText] = useState('');
   const [pickupMethod, setPickupMethod] = useState(
-    () => normalizePickupMethod(localStorage.getItem(PICKUP_STORAGE_KEY) || localStorage.getItem(LEGACY_PICKUP_STORAGE_KEY) || PICKUP_SELF),
+    () => normalizePickupMethod(localStorage.getItem(PICKUP_STORAGE_KEY) || localStorage.getItem(LEGACY_PICKUP_STORAGE_KEY) || PICKUP_METHOD),
   );
   const [cartItems, setCartItems] = useState(getStoredCart);
 
