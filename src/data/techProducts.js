@@ -1,3 +1,5 @@
+import switch2SampleImage from '../assets/switch-2-sample.jpg';
+
 export const techProducts = [
   {
     id: 'tech-dyson-airwrap',
@@ -48,15 +50,15 @@ export const techProducts = [
     id: 'tech-switch-oled',
     section: 'Tech',
     sectionLabel: '电子产品',
-    name: 'Nintendo Switch OLED 主机',
+    name: 'Nintendo Switch 2 主机',
     brand: 'Nintendo',
     category: 'Switch',
     status: '预订',
     price: '微信询价',
-    spec: 'OLED / 白色或红蓝手柄可询',
-    image: 'https://placehold.co/900x900/e9edf0/1f2937?text=Nintendo+Switch',
-    shortDescription: '适合聚会、宿舍和家庭娱乐，主机颜色和套装可预订。',
-    description: 'Nintendo Switch OLED 主机，可按颜色、套装和活动价预订。',
+    spec: 'Switch 2 / 港版或美版可询',
+    image: switch2SampleImage,
+    shortDescription: 'Switch 2 主机样图，版本、库存和价格请微信确认。',
+    description: 'Nintendo Switch 2 主机可按版本、套装和活动价预订。',
     reminder: '电子产品建议当面验货，价格和库存以微信确认为准。',
   },
   {
