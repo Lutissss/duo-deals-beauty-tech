@@ -7,6 +7,7 @@ import InquiryCart from './components/InquiryCart.jsx';
 import ProductCard from './components/ProductCard.jsx';
 import SearchBar from './components/SearchBar.jsx';
 import SiteGateway from './components/SiteGateway.jsx';
+import Switch2Configurator from './components/Switch2Configurator.jsx';
 import TopNav from './components/TopNav.jsx';
 import { beautyProducts } from './data/beautyProducts.js';
 import { techProducts } from './data/techProducts.js';
@@ -77,6 +78,25 @@ const getBrowserPath = (path) => {
 
 const hasUploadedImage = (product) => !String(product.image).includes('placehold.co');
 const getCartItemKey = (item) => item.cartId || item.id;
+const switch2Schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Nintendo Switch 2',
+  description: 'Buy Nintendo Switch 2 with fast shipping and competitive pricing. Available in Standard and Bundle editions.',
+  brand: {
+    '@type': 'Brand',
+    name: 'Nintendo',
+  },
+  category: 'Video Game Console',
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'USD',
+    lowPrice: '449.99',
+    highPrice: '499.99',
+    availability: 'https://schema.org/InStock',
+    url: 'https://lutissss.github.io/duo-deals-beauty-tech/electronics',
+  },
+};
 
 const getStoredCart = () => {
   try {
@@ -90,7 +110,7 @@ const getStoredCart = () => {
       ...item,
       section: item.section || (['美妆护肤', '香水', '彩妆', '套装'].includes(item.category) ? 'Beauty' : 'Tech'),
       sectionLabel: item.sectionLabel || (['美妆护肤', '香水', '彩妆', '套装'].includes(item.category) ? '美妆护肤' : '电子产品'),
-      price: '微信询价',
+      price: item.price || '微信询价',
     }));
   } catch {
     return [];
@@ -199,6 +219,68 @@ export default function App() {
       .map(({ product }) => product);
   }, [activeBrand, activeCategory, currentSite, searchTerm]);
 
+  const switch2Product = currentSite?.key === 'electronics'
+    ? currentSite.products.find((product) => product.id === 'tech-switch-oled')
+    : null;
+  const shouldShowSwitch2Configurator = useMemo(() => {
+    if (!switch2Product) return false;
+
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+    const searchableText = [
+      switch2Product.name,
+      switch2Product.brand,
+      switch2Product.category,
+      switch2Product.status,
+      switch2Product.spec,
+      switch2Product.shortDescription,
+      'Nintendo Switch 2 Standard Edition Mario Kart World Bundle Pro Controller Joy-Con Camera Protection Plan',
+    ]
+      .join(' ')
+      .toLowerCase();
+
+    const matchesCategory =
+      activeCategory === '全部' ||
+      activeCategory === 'Switch' ||
+      (activeCategory === '预订' && switch2Product.status === '预订') ||
+      (activeCategory === '现货' && switch2Product.status === '现货');
+    const matchesBrand = activeBrand === '全部品牌' || activeBrand === 'Nintendo';
+    const matchesSearch = !normalizedSearch || searchableText.includes(normalizedSearch);
+
+    return matchesCategory && matchesBrand && matchesSearch;
+  }, [activeBrand, activeCategory, searchTerm, switch2Product]);
+  const displayProducts = useMemo(
+    () => filteredProducts.filter((product) => product.id !== 'tech-switch-oled'),
+    [filteredProducts],
+  );
+  const displayedProductCount = displayProducts.length + (shouldShowSwitch2Configurator ? 1 : 0);
+
+  useEffect(() => {
+    const description = 'Buy Nintendo Switch 2 with fast shipping and competitive pricing. Available in Standard and Bundle editions.';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    const existingSchema = document.getElementById('switch-2-product-schema');
+
+    if (currentSite?.key !== 'electronics') {
+      document.title = 'Duo Deals｜美妆数码好价';
+      metaDescription?.setAttribute(
+        'content',
+        'Duo Deals｜美妆数码好价，美国本地美妆护肤、香水、电子产品和数码配件挑选与微信询价。',
+      );
+      existingSchema?.remove();
+      return;
+    }
+
+    document.title = 'Nintendo Switch 2｜Duo Deals 美妆数码好价';
+    metaDescription?.setAttribute('content', description);
+
+    const schemaScript = existingSchema || document.createElement('script');
+    schemaScript.id = 'switch-2-product-schema';
+    schemaScript.type = 'application/ld+json';
+    schemaScript.textContent = JSON.stringify(switch2Schema);
+    if (!existingSchema) {
+      document.head.appendChild(schemaScript);
+    }
+  }, [currentSite]);
+
   const inquiryDraft = useMemo(() => {
     if (cartItems.length === 0) return '';
 
@@ -234,12 +316,13 @@ export default function App() {
     setCartItems((items) => {
       const productKey = getCartItemKey(product);
       const existing = items.find((item) => getCartItemKey(item) === productKey);
+      const quantityToAdd = product.quantity || 1;
 
       if (existing) {
-        return items.map((item) => (getCartItemKey(item) === productKey ? { ...item, quantity: item.quantity + 1 } : item));
+        return items.map((item) => (getCartItemKey(item) === productKey ? { ...item, quantity: item.quantity + quantityToAdd } : item));
       }
 
-      return [...items, { ...product, quantity: 1 }];
+      return [...items, { ...product, quantity: quantityToAdd }];
     });
 
     if (openCart) {
@@ -316,21 +399,30 @@ export default function App() {
                   </h2>
                 </div>
                 <p className="rounded-full bg-white px-3 py-1 text-sm font-medium text-slate-500 ring-1 ring-slate-200">
-                  {filteredProducts.length} 件
+                  {displayedProductCount} 件
                 </p>
               </div>
 
-              {filteredProducts.length > 0 ? (
-                <div className="grid grid-cols-2 gap-1">
-                  {filteredProducts.map((product) => (
+              {displayedProductCount > 0 ? (
+                <>
+                  {shouldShowSwitch2Configurator ? (
+                    <Switch2Configurator
+                      product={switch2Product}
+                      onAddToCart={(item) => addToCart(item)}
+                      onBuyNow={(item) => addToCart(item, true)}
+                    />
+                  ) : null}
+                  <div className="grid grid-cols-2 gap-1">
+                    {displayProducts.map((product) => (
                     <ProductCard
                       key={product.id}
                       product={product}
                       onAddToCart={(item) => addToCart(item)}
                       onInquiry={(item) => addToCart(item, true)}
                     />
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                </>
               ) : (
                 <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-10 text-center">
                   <p className="font-semibold text-slate-900">暂时没有匹配的商品</p>
