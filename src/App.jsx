@@ -5,12 +5,12 @@ import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
 import InquiryCart from './components/InquiryCart.jsx';
 import ProductCard from './components/ProductCard.jsx';
-import SearchBar from './components/SearchBar.jsx';
 import SiteGateway from './components/SiteGateway.jsx';
 import Switch2Configurator from './components/Switch2Configurator.jsx';
 import TopNav from './components/TopNav.jsx';
 import { beautyProducts } from './data/beautyProducts.js';
 import { techProducts } from './data/techProducts.js';
+import { BadgeDollarSign, PackageCheck, ShieldCheck, Truck, WalletCards } from 'lucide-react';
 
 const CART_STORAGE_KEY = 'duo-deals-inquiry-cart-v2';
 const PICKUP_STORAGE_KEY = 'duo-deals-pickup-method-v1';
@@ -78,6 +78,13 @@ const getBrowserPath = (path) => {
 
 const hasUploadedImage = (product) => !String(product.image).includes('placehold.co');
 const getCartItemKey = (item) => item.cartId || item.id;
+const serviceBenefits = [
+  { title: '本地取货', description: 'WashU 附近线下自提', icon: PackageCheck },
+  { title: '送货上门', description: 'WashU 附近可送货', icon: Truck },
+  { title: '正品渠道', description: '美国本地渠道购入', icon: ShieldCheck },
+  { title: '微信确认', description: '价格库存当天确认', icon: WalletCards },
+  { title: '好价优先', description: '部分商品支持免税价', icon: BadgeDollarSign },
+];
 const switch2Schema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -249,7 +256,7 @@ export default function App() {
     return matchesCategory && matchesBrand && matchesSearch;
   }, [activeBrand, activeCategory, searchTerm, switch2Product]);
   const displayProducts = useMemo(
-    () => filteredProducts.filter((product) => product.id !== 'tech-switch-oled'),
+    () => filteredProducts,
     [filteredProducts],
   );
   const displayedProductCount = displayProducts.length + (shouldShowSwitch2Configurator ? 1 : 0);
@@ -378,41 +385,40 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#fbfaf7] text-slate-900">
-      <TopNav route={route} onNavigate={navigate} onOpenCart={() => setIsCartOpen(true)} cartCount={cartCount} />
+      <TopNav
+        route={route}
+        onNavigate={navigate}
+        onOpenCart={() => setIsCartOpen(true)}
+        cartCount={cartCount}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      />
 
       {!currentSite ? (
         <SiteGateway onNavigate={navigate} />
       ) : (
         <div className={`min-h-screen ${currentSite.pageClass}`}>
-          <Header site={currentSite} onNavigate={navigate} />
-          <SearchBar value={searchTerm} onChange={setSearchTerm} />
           <CategoryTabs categories={currentSite.categories} activeCategory={activeCategory} onChange={setActiveCategory} />
+          <Header site={currentSite} onNavigate={navigate} />
           <BrandFilter brands={availableBrands} activeBrand={activeBrand} onChange={setActiveBrand} />
 
-          <main className={`${currentSite.pageClass} px-3 py-4`}>
-            <section className="mx-auto max-w-screen-sm">
-              <div className="mb-4 flex items-end justify-between gap-3">
+          <main className={`${currentSite.pageClass} px-4 py-5 md:py-8`}>
+            <section id="product-section" className="mx-auto max-w-7xl">
+              <div className="mb-5 flex items-end justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-emerald-700">商品列表</p>
-                  <h2 className="text-xl font-bold leading-tight text-slate-950">
-                    {currentSite.shortName}｜{activeCategory}
+                  <p className="text-sm font-bold text-slate-500">Popular {currentSite.section} Products</p>
+                  <h2 className="text-2xl font-black leading-tight text-slate-950">
+                    热门{currentSite.shortName}
                   </h2>
                 </div>
-                <p className="rounded-full bg-white px-3 py-1 text-sm font-medium text-slate-500 ring-1 ring-slate-200">
-                  {displayedProductCount} 件
+                <p className="rounded-full bg-white px-3 py-1 text-sm font-bold text-slate-600 ring-1 ring-slate-200">
+                  View All · {displayedProductCount}
                 </p>
               </div>
 
               {displayedProductCount > 0 ? (
                 <>
-                  {shouldShowSwitch2Configurator ? (
-                    <Switch2Configurator
-                      product={switch2Product}
-                      onAddToCart={(item) => addToCart(item)}
-                      onBuyNow={(item) => addToCart(item, true)}
-                    />
-                  ) : null}
-                  <div className="grid grid-cols-2 gap-1">
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 xl:gap-4">
                     {displayProducts.map((product) => (
                     <ProductCard
                       key={product.id}
@@ -422,6 +428,34 @@ export default function App() {
                     />
                     ))}
                   </div>
+
+                  <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+                    {serviceBenefits.map(({ title, description, icon: Icon }) => (
+                      <div key={title} className="flex items-center gap-3 rounded-2xl bg-white px-4 py-4 shadow-sm ring-1 ring-slate-200">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-50 text-slate-950 ring-1 ring-slate-200">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <span>
+                          <span className="block text-sm font-black text-slate-950">{title}</span>
+                          <span className="mt-0.5 block text-xs font-medium text-slate-500">{description}</span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {shouldShowSwitch2Configurator ? (
+                    <div className="mt-8">
+                      <div className="mb-4">
+                        <p className="text-sm font-bold text-slate-500">Premium Product Builder</p>
+                        <h2 className="text-2xl font-black text-slate-950">Nintendo Switch 2 配置询价</h2>
+                      </div>
+                      <Switch2Configurator
+                        product={switch2Product}
+                        onAddToCart={(item) => addToCart(item)}
+                        onBuyNow={(item) => addToCart(item, true)}
+                      />
+                    </div>
+                  ) : null}
                 </>
               ) : (
                 <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-10 text-center">
