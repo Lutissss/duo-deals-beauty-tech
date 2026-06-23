@@ -75,6 +75,8 @@ const getBrowserPath = (path) => {
   return `${BASE_PATH}${path === '/' ? '/' : path}`;
 };
 
+const hasUploadedImage = (product) => !String(product.image).includes('placehold.co');
+
 const getStoredCart = () => {
   try {
     const stored =
@@ -163,30 +165,37 @@ export default function App() {
     if (!currentSite) return [];
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
-    return currentSite.products.filter((product) => {
-      const searchableText = [
-        product.name,
-        product.brand,
-        product.category,
-        product.status,
-        product.price,
-        product.spec,
-        product.shortDescription,
-        product.description,
-      ]
-        .join(' ')
-        .toLowerCase();
+    return currentSite.products
+      .map((product, originalIndex) => ({ product, originalIndex }))
+      .filter(({ product }) => {
+        const searchableText = [
+          product.name,
+          product.brand,
+          product.category,
+          product.status,
+          product.price,
+          product.spec,
+          product.shortDescription,
+          product.description,
+        ]
+          .join(' ')
+          .toLowerCase();
 
-      const matchesCategory =
-        activeCategory === '全部' ||
-        product.category === activeCategory ||
-        (activeCategory === '现货' && product.status === '现货') ||
-        (activeCategory === '预订' && product.status === '预订');
-      const matchesBrand = activeBrand === '全部品牌' || product.brand === activeBrand;
-      const matchesSearch = !normalizedSearch || searchableText.includes(normalizedSearch);
+        const matchesCategory =
+          activeCategory === '全部' ||
+          product.category === activeCategory ||
+          (activeCategory === '现货' && product.status === '现货') ||
+          (activeCategory === '预订' && product.status === '预订');
+        const matchesBrand = activeBrand === '全部品牌' || product.brand === activeBrand;
+        const matchesSearch = !normalizedSearch || searchableText.includes(normalizedSearch);
 
-      return matchesCategory && matchesBrand && matchesSearch;
-    });
+        return matchesCategory && matchesBrand && matchesSearch;
+      })
+      .sort((a, b) => {
+        const imageRank = Number(hasUploadedImage(b.product)) - Number(hasUploadedImage(a.product));
+        return imageRank || a.originalIndex - b.originalIndex;
+      })
+      .map(({ product }) => product);
   }, [activeBrand, activeCategory, currentSite, searchTerm]);
 
   const inquiryDraft = useMemo(() => {
