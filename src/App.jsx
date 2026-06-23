@@ -50,7 +50,7 @@ const siteConfigs = {
     sectionLabel: '电子产品',
     eyebrow: 'Tech & Accessories',
     heroTitle: 'Apple / Dyson / Switch / 数码配件，本地好价先看这里',
-    description: '本区专注电子产品、数码配件和家用电器好价。贵重商品建议当面验货，价格和库存以微信确认为准。',
+    description: '本区专注电子产品、数码配件和家用电器好价，商品主要通过美国本地渠道购入。贵重商品建议当面验货，价格和库存以微信确认为准。',
     categories: ['全部', 'Apple', 'Dyson', 'Switch', '数码配件', '家用电器', '现货', '预订'],
     products: techProducts,
     pageClass: 'bg-[#f7f8fa]',
