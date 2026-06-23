@@ -74,6 +74,7 @@ export const techProducts = [
     price: '微信询价',
     spec: 'iPad Pro / 尺寸和内存可选',
     image: ipadProSampleImage,
+    detailPath: '/electronics/ipad-pro',
     optionGroups: [
       { name: '尺寸', values: ['11 英寸', '13 英寸'] },
       { name: '内存', values: ['256GB', '512GB', '1TB', '2TB'] },

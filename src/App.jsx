@@ -5,6 +5,7 @@ import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
 import InquiryCart from './components/InquiryCart.jsx';
 import ProductCard from './components/ProductCard.jsx';
+import ProductConfigurator from './components/ProductConfigurator.jsx';
 import SiteGateway from './components/SiteGateway.jsx';
 import Switch2Configurator from './components/Switch2Configurator.jsx';
 import TopNav from './components/TopNav.jsx';
@@ -68,7 +69,8 @@ const getRouteFromLocation = () => {
 
   if (path === '/beauty' || path === '/beauty/') return '/beauty';
   if (path === '/electronics' || path === '/electronics/') return '/electronics';
-  if (path === '/electronics/switch-2' || path === '/electronics/switch-2/') return '/electronics/switch-2';
+  const detailRoute = techProducts.find((product) => product.detailPath === path || `${product.detailPath}/` === path)?.detailPath;
+  if (detailRoute) return detailRoute;
   return '/';
 };
 
@@ -142,6 +144,7 @@ export default function App() {
   const currentSite = route === '/beauty' ? siteConfigs.beauty : route === '/electronics' ? siteConfigs.electronics : null;
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const switch2Product = siteConfigs.electronics.products.find((product) => product.id === 'tech-switch-oled');
+  const detailProduct = siteConfigs.electronics.products.find((product) => product.detailPath === route);
 
   const navigate = (path) => {
     window.history.pushState({}, '', getBrowserPath(path));
@@ -241,10 +244,10 @@ export default function App() {
     const existingSchema = document.getElementById('switch-2-product-schema');
 
     if (!isSwitch2Detail) {
-      document.title = 'Duo Deals｜美妆数码好价';
+      document.title = detailProduct ? `${detailProduct.name}｜Duo Deals 美妆数码好价` : 'Duo Deals｜美妆数码好价';
       metaDescription?.setAttribute(
         'content',
-        'Duo Deals｜美妆数码好价，美国本地美妆护肤、香水、电子产品和数码配件挑选与微信询价。',
+        detailProduct?.shortDescription || 'Duo Deals｜美妆数码好价，美国本地美妆护肤、香水、电子产品和数码配件挑选与微信询价。',
       );
       existingSchema?.remove();
       return;
@@ -260,7 +263,7 @@ export default function App() {
     if (!existingSchema) {
       document.head.appendChild(schemaScript);
     }
-  }, [isSwitch2Detail]);
+  }, [detailProduct, isSwitch2Detail]);
 
   const inquiryDraft = useMemo(() => {
     if (cartItems.length === 0) return '';
@@ -408,6 +411,52 @@ export default function App() {
 
             <Switch2Configurator
               product={switch2Product}
+              onAddToCart={(item) => addToCart(item)}
+              onBuyNow={(item) => addToCart(item, true)}
+            />
+          </main>
+          <Footer site={siteConfigs.electronics} />
+        </div>
+      ) : detailProduct ? (
+        <div className="min-h-screen bg-[#f7f8fa]">
+          <main className="mx-auto max-w-7xl px-4 py-5 md:py-8">
+            <button
+              type="button"
+              onClick={() => navigate('/electronics')}
+              className="mb-5 inline-flex items-center gap-1.5 text-sm font-bold text-slate-600 hover:text-slate-950"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              返回电子产品专区
+            </button>
+
+            <section className="mb-6 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
+              <div className="grid items-center gap-4 md:grid-cols-[0.9fr_1.1fr]">
+                <div className="px-6 py-8 md:px-10 md:py-12">
+                  <p className="text-sm font-black uppercase tracking-normal text-slate-500">{detailProduct.brand}</p>
+                  <h1 className="mt-3 text-4xl font-black leading-tight text-slate-950 md:text-6xl">{detailProduct.name}</h1>
+                  <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
+                    {detailProduct.shortDescription}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {['全新商品', '配置微信确认', 'WashU 附近线下自提或送货上门'].map((tag) => (
+                      <span key={tag} className="rounded-full bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-white to-slate-100 p-6 md:p-10">
+                  <img
+                    src={detailProduct.image}
+                    alt={detailProduct.name}
+                    className="mx-auto aspect-[1.2/1] w-full max-w-xl object-contain"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <ProductConfigurator
+              product={detailProduct}
               onAddToCart={(item) => addToCart(item)}
               onBuyNow={(item) => addToCart(item, true)}
             />

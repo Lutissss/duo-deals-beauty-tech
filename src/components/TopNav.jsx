@@ -7,7 +7,7 @@ const navItems = [
 ];
 
 export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searchTerm = '', onSearchChange }) {
-  const showSearch = route === '/beauty' || route === '/electronics';
+  const showSearch = route === '/beauty' || route === '/electronics' || route.startsWith('/electronics/');
 
   return (
     <nav className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 px-3 py-2 shadow-sm shadow-slate-200/40 backdrop-blur">

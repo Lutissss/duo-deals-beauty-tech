@@ -25,6 +25,7 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
   const isUploadedImage = !String(product.image).includes('placehold.co');
   const numericPrice = product.price?.startsWith('$') ? product.price : null;
   const hasDetailPage = Boolean(product.detailPath && onViewDetails);
+  const displaySpec = hasDetailPage ? product.spec : selectedProduct.spec;
   const imageContent = (
     <>
       <img
@@ -77,11 +78,11 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
             <h2 className="line-clamp-1 text-sm font-black leading-5 text-slate-950">{product.name}</h2>
           )}
           <p className="mt-1 line-clamp-1 text-xs font-semibold leading-5 text-slate-500">
-            {selectedProduct.spec}
+            {displaySpec}
           </p>
         </div>
 
-        {product.optionGroups?.length ? (
+        {product.optionGroups?.length && !hasDetailPage ? (
           <div className="space-y-1.5 rounded-xl bg-slate-50 p-2 ring-1 ring-slate-100">
             {product.optionGroups.map((group) => (
               <div key={group.name}>
@@ -118,9 +119,9 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
           </div>
           <button
             type="button"
-            onClick={() => onAddToCart(selectedProduct)}
+            onClick={() => (hasDetailPage ? onViewDetails(product.detailPath) : onAddToCart(selectedProduct))}
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-950 shadow-sm transition active:scale-95"
-            aria-label="加入询价清单"
+            aria-label={hasDetailPage ? '查看配置' : '加入询价清单'}
           >
             <ShoppingBag className="h-4 w-4" />
           </button>
