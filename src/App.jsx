@@ -389,7 +389,7 @@ export default function App() {
                   <p className="text-sm font-black uppercase tracking-normal text-slate-500">Nintendo</p>
                   <h1 className="mt-3 text-4xl font-black leading-tight text-slate-950 md:text-6xl">Nintendo Switch 2</h1>
                   <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
-                    选择版本、配件、保护计划和数量后加入询价清单。最终价格、库存和取货方式以微信确认为准。
+                    选择版本、配件和数量后加入询价清单。最终价格、库存和取货方式以微信确认为准。
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {['全新现货 / 预订可询', '微信确认价格', 'WashU 附近线下自提或送货上门'].map((tag) => (
