@@ -52,7 +52,7 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
                 value={searchTerm}
                 onChange={(event) => onSearchChange?.(event.target.value)}
                 className="min-w-0 flex-1 bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-500"
-                placeholder="Search products, brands..."
+                placeholder="搜索商品、品牌、分类"
                 type="search"
                 inputMode="search"
               />

@@ -6,10 +6,10 @@ export default function Header({ site, onNavigate }) {
   const isBeauty = site.key === 'beauty';
   const SiteIcon = isBeauty ? Sparkles : Smartphone;
   const heroImage = isBeauty ? beautyHomeImage : techHomeImage;
-  const heroLabel = isBeauty ? 'Beauty' : 'Tech';
+  const heroLabel = isBeauty ? '美妆护肤' : '电子产品';
   const heroSubtitle = isBeauty
-    ? 'Skincare, makeup, fragrance and gift sets.'
-    : 'Apple, Dyson, Switch and daily accessories.';
+    ? '护肤、彩妆、香水、套装，本地好价精选。'
+    : 'Apple、Dyson、Switch 和日常数码配件。';
 
   return (
     <header className={isBeauty ? 'bg-[#fbfaf7]' : 'bg-[#f7f8fa]'}>
@@ -40,7 +40,7 @@ export default function Header({ site, onNavigate }) {
                 onClick={() => document.getElementById('product-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 className="mt-7 inline-flex h-12 items-center gap-2 rounded-xl bg-slate-950 px-5 text-sm font-bold text-white shadow-sm transition active:scale-[0.98]"
               >
-                Shop All {heroLabel}
+                查看全部{heroLabel}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>

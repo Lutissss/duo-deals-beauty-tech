@@ -36,7 +36,7 @@ const siteConfigs = {
     shortName: '美妆护肤',
     section: 'Beauty',
     sectionLabel: '美妆护肤',
-    eyebrow: 'Beauty & Skincare',
+    eyebrow: '美妆护肤专区',
     heroTitle: '护肤 / 彩妆 / 香水 / 套装，美国本地好价精选',
     description: '本区专注美妆护肤、彩妆、香水和套装好价。色号、容量和库存以微信确认为准。',
     categories: ['全部', '护肤', '彩妆', '香水', '套装', '现货', '预订'],
@@ -50,7 +50,7 @@ const siteConfigs = {
     shortName: '电子产品',
     section: 'Tech',
     sectionLabel: '电子产品',
-    eyebrow: 'Tech & Accessories',
+    eyebrow: '电子数码专区',
     heroTitle: 'Apple / Dyson / Switch / 数码配件，本地好价先看这里',
     description: '本区专注电子产品、数码配件和家用电器好价，商品主要通过美国本地渠道购入。贵重商品建议当面验货，价格和库存以微信确认为准。',
     categories: ['全部', 'Apple', 'Dyson', 'Switch', '数码配件', '家用电器', '现货', '预订'],
@@ -92,7 +92,7 @@ const switch2Schema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: 'Nintendo Switch 2',
-  description: 'Buy Nintendo Switch 2 with fast shipping and competitive pricing. Available in Standard and Bundle editions.',
+  description: 'Nintendo Switch 2 本地好价询价，支持标准版和 Mario Kart World 同捆版，价格和库存请微信确认。',
   brand: {
     '@type': 'Brand',
     name: 'Nintendo',
@@ -239,7 +239,7 @@ export default function App() {
   const displayedProductCount = displayProducts.length;
 
   useEffect(() => {
-    const description = 'Buy Nintendo Switch 2 with fast shipping and competitive pricing. Available in Standard and Bundle editions.';
+    const description = 'Nintendo Switch 2 本地好价询价，支持标准版和 Mario Kart World 同捆版，价格和库存请微信确认。';
     const metaDescription = document.querySelector('meta[name="description"]');
     const existingSchema = document.getElementById('switch-2-product-schema');
 
@@ -269,8 +269,8 @@ export default function App() {
     if (cartItems.length === 0) return '';
 
     const sections = [
-      { section: 'Beauty', title: '【Beauty 美妆护肤】' },
-      { section: 'Tech', title: '【Tech 电子产品】' },
+      { section: 'Beauty', title: '【美妆护肤】' },
+      { section: 'Tech', title: '【电子产品】' },
     ];
 
     const groupedText = sections
@@ -475,13 +475,13 @@ export default function App() {
             <section id="product-section" className="mx-auto max-w-7xl">
               <div className="mb-5 flex items-end justify-between gap-3">
                 <div>
-                  <p className="text-sm font-bold text-slate-500">Popular {currentSite.section} Products</p>
+                  <p className="text-sm font-bold text-slate-500">热门商品</p>
                   <h2 className="text-2xl font-black leading-tight text-slate-950">
                     热门{currentSite.shortName}
                   </h2>
                 </div>
                 <p className="rounded-full bg-white px-3 py-1 text-sm font-bold text-slate-600 ring-1 ring-slate-200">
-                  View All · {displayedProductCount}
+                  共 {displayedProductCount} 件
                 </p>
               </div>
 

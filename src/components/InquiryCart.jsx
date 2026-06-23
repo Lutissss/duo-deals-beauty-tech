@@ -69,7 +69,7 @@ export default function InquiryCart({
                                   item.section === 'Beauty' ? 'bg-rose-50 text-rose-700' : 'bg-sky-50 text-sky-700'
                                 }`}
                               >
-                                {item.section} / {item.sectionLabel}
+                                {item.sectionLabel}
                               </span>
                               <p className="truncate text-xs font-medium text-slate-500">{item.brand}</p>
                             </div>
