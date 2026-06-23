@@ -76,6 +76,7 @@ const getBrowserPath = (path) => {
 };
 
 const hasUploadedImage = (product) => !String(product.image).includes('placehold.co');
+const getCartItemKey = (item) => item.cartId || item.id;
 
 const getStoredCart = () => {
   try {
@@ -231,10 +232,11 @@ export default function App() {
 
   const addToCart = (product, openCart = false) => {
     setCartItems((items) => {
-      const existing = items.find((item) => item.id === product.id);
+      const productKey = getCartItemKey(product);
+      const existing = items.find((item) => getCartItemKey(item) === productKey);
 
       if (existing) {
-        return items.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item));
+        return items.map((item) => (getCartItemKey(item) === productKey ? { ...item, quantity: item.quantity + 1 } : item));
       }
 
       return [...items, { ...product, quantity: 1 }];
@@ -246,19 +248,19 @@ export default function App() {
   };
 
   const incrementItem = (id) => {
-    setCartItems((items) => items.map((item) => (item.id === id ? { ...item, quantity: item.quantity + 1 } : item)));
+    setCartItems((items) => items.map((item) => (getCartItemKey(item) === id ? { ...item, quantity: item.quantity + 1 } : item)));
   };
 
   const decrementItem = (id) => {
     setCartItems((items) =>
       items
-        .map((item) => (item.id === id ? { ...item, quantity: Math.max(0, item.quantity - 1) } : item))
+        .map((item) => (getCartItemKey(item) === id ? { ...item, quantity: Math.max(0, item.quantity - 1) } : item))
         .filter((item) => item.quantity > 0),
     );
   };
 
   const removeItem = (id) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
+    setCartItems((items) => items.filter((item) => getCartItemKey(item) !== id));
   };
 
   const generateInquiryText = () => {

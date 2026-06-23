@@ -1,3 +1,4 @@
+import ipadProSampleImage from '../assets/ipad-pro-sample.jpg';
 import switch2SampleImage from '../assets/switch-2-sample.jpg';
 
 export const techProducts = [
@@ -60,6 +61,26 @@ export const techProducts = [
     shortDescription: 'Switch 2 主机样图，套装、库存和价格请微信确认。',
     description: 'Nintendo Switch 2 主机可按套装和活动价预订。',
     reminder: '电子产品建议当面验货，价格和库存以微信确认为准。',
+  },
+  {
+    id: 'tech-ipad-pro',
+    section: 'Tech',
+    sectionLabel: '电子产品',
+    name: 'iPad Pro',
+    brand: 'Apple',
+    category: 'Apple',
+    status: '预订',
+    price: '微信询价',
+    spec: 'iPad Pro / 尺寸和内存可选',
+    image: ipadProSampleImage,
+    optionGroups: [
+      { name: '尺寸', values: ['11 英寸', '13 英寸'] },
+      { name: '内存', values: ['256GB', '512GB', '1TB', '2TB'] },
+      { name: '连接方式', values: ['Wi-Fi', 'Wi-Fi + Cellular'] },
+    ],
+    shortDescription: 'iPad Pro 样图，尺寸、内存、连接方式、库存和价格请微信确认。',
+    description: 'iPad Pro 可按尺寸、内存和连接方式组合询价，适合学习、绘图、影音和轻办公。',
+    reminder: '电子产品支持当面验货，库存和价格以微信确认为准。',
   },
   {
     id: 'tech-switch-mario-bundle',
