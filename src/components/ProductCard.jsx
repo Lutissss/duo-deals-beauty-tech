@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
-import { MessageCircle, ShoppingBag } from 'lucide-react';
+import { ArrowRight, MessageCircle, ShoppingBag } from 'lucide-react';
 
-export default function ProductCard({ product, onAddToCart, onInquiry }) {
+export default function ProductCard({ product, onAddToCart, onInquiry, onViewDetails }) {
   const defaultOptions = useMemo(
     () =>
       Object.fromEntries(
@@ -24,25 +24,39 @@ export default function ProductCard({ product, onAddToCart, onInquiry }) {
 
   const isUploadedImage = !String(product.image).includes('placehold.co');
   const numericPrice = product.price?.startsWith('$') ? product.price : null;
+  const hasDetailPage = Boolean(product.detailPath && onViewDetails);
+  const imageContent = (
+    <>
+      <img
+        src={product.image}
+        alt={product.name}
+        className={`aspect-square w-full rounded-xl object-contain ${isUploadedImage ? 'mix-blend-normal' : ''}`}
+        loading="lazy"
+      />
+      <div className="absolute left-3 top-3 flex gap-1">
+        {isUploadedImage ? (
+          <span className="rounded-md bg-slate-950 px-2 py-1 text-[10px] font-black uppercase text-white">New</span>
+        ) : null}
+        {product.status === '现货' ? (
+          <span className="rounded-md bg-red-600 px-2 py-1 text-[10px] font-black uppercase text-white">Hot</span>
+        ) : null}
+      </div>
+    </>
+  );
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-200/60 transition hover:-translate-y-0.5 hover:shadow-md">
-      <div className="relative bg-gradient-to-br from-white to-slate-50 p-3">
-        <img
-          src={product.image}
-          alt={product.name}
-          className={`aspect-square w-full rounded-xl object-contain ${isUploadedImage ? 'mix-blend-normal' : ''}`}
-          loading="lazy"
-        />
-        <div className="absolute left-3 top-3 flex gap-1">
-          {isUploadedImage ? (
-            <span className="rounded-md bg-slate-950 px-2 py-1 text-[10px] font-black uppercase text-white">New</span>
-          ) : null}
-          {product.status === '现货' ? (
-            <span className="rounded-md bg-red-600 px-2 py-1 text-[10px] font-black uppercase text-white">Hot</span>
-          ) : null}
-        </div>
-      </div>
+      {hasDetailPage ? (
+        <button
+          type="button"
+          onClick={() => onViewDetails(product.detailPath)}
+          className="relative block w-full cursor-pointer bg-gradient-to-br from-white to-slate-50 p-3 text-left"
+        >
+          {imageContent}
+        </button>
+      ) : (
+        <div className="relative bg-gradient-to-br from-white to-slate-50 p-3">{imageContent}</div>
+      )}
 
       <div className="space-y-2 p-3">
         <div className="flex items-center justify-between gap-1">
@@ -51,7 +65,17 @@ export default function ProductCard({ product, onAddToCart, onInquiry }) {
         </div>
 
         <div>
-          <h2 className="line-clamp-1 text-sm font-black leading-5 text-slate-950">{product.name}</h2>
+          {hasDetailPage ? (
+            <button
+              type="button"
+              onClick={() => onViewDetails(product.detailPath)}
+              className="line-clamp-1 text-left text-sm font-black leading-5 text-slate-950 underline-offset-4 hover:underline"
+            >
+              {product.name}
+            </button>
+          ) : (
+            <h2 className="line-clamp-1 text-sm font-black leading-5 text-slate-950">{product.name}</h2>
+          )}
           <p className="mt-1 line-clamp-1 text-xs font-semibold leading-5 text-slate-500">
             {selectedProduct.spec}
           </p>
@@ -105,11 +129,11 @@ export default function ProductCard({ product, onAddToCart, onInquiry }) {
         <div className="grid grid-cols-1">
           <button
             type="button"
-            onClick={() => onInquiry(selectedProduct)}
+            onClick={() => (hasDetailPage ? onViewDetails(product.detailPath) : onInquiry(selectedProduct))}
             className="inline-flex h-9 items-center justify-center gap-1 rounded-xl bg-slate-950 text-xs font-bold text-white shadow-sm active:bg-slate-800"
           >
-            <MessageCircle className="h-3.5 w-3.5" />
-            微信询价
+            {hasDetailPage ? <ArrowRight className="h-3.5 w-3.5" /> : <MessageCircle className="h-3.5 w-3.5" />}
+            {hasDetailPage ? '查看配置' : '微信询价'}
           </button>
         </div>
       </div>

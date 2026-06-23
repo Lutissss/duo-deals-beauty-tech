@@ -10,7 +10,7 @@ import Switch2Configurator from './components/Switch2Configurator.jsx';
 import TopNav from './components/TopNav.jsx';
 import { beautyProducts } from './data/beautyProducts.js';
 import { techProducts } from './data/techProducts.js';
-import { BadgeDollarSign, PackageCheck, ShieldCheck, Truck, WalletCards } from 'lucide-react';
+import { ArrowLeft, BadgeDollarSign, PackageCheck, ShieldCheck, Truck, WalletCards } from 'lucide-react';
 
 const CART_STORAGE_KEY = 'duo-deals-inquiry-cart-v2';
 const PICKUP_STORAGE_KEY = 'duo-deals-pickup-method-v1';
@@ -68,6 +68,7 @@ const getRouteFromLocation = () => {
 
   if (path === '/beauty' || path === '/beauty/') return '/beauty';
   if (path === '/electronics' || path === '/electronics/') return '/electronics';
+  if (path === '/electronics/switch-2' || path === '/electronics/switch-2/') return '/electronics/switch-2';
   return '/';
 };
 
@@ -101,7 +102,7 @@ const switch2Schema = {
     lowPrice: '449.99',
     highPrice: '499.99',
     availability: 'https://schema.org/InStock',
-    url: 'https://lutissss.github.io/duo-deals-beauty-tech/electronics',
+    url: 'https://lutissss.github.io/duo-deals-beauty-tech/electronics/switch-2',
   },
 };
 
@@ -137,8 +138,10 @@ export default function App() {
   );
   const [cartItems, setCartItems] = useState(getStoredCart);
 
+  const isSwitch2Detail = route === '/electronics/switch-2';
   const currentSite = route === '/beauty' ? siteConfigs.beauty : route === '/electronics' ? siteConfigs.electronics : null;
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const switch2Product = siteConfigs.electronics.products.find((product) => product.id === 'tech-switch-oled');
 
   const navigate = (path) => {
     window.history.pushState({}, '', getBrowserPath(path));
@@ -226,47 +229,18 @@ export default function App() {
       .map(({ product }) => product);
   }, [activeBrand, activeCategory, currentSite, searchTerm]);
 
-  const switch2Product = currentSite?.key === 'electronics'
-    ? currentSite.products.find((product) => product.id === 'tech-switch-oled')
-    : null;
-  const shouldShowSwitch2Configurator = useMemo(() => {
-    if (!switch2Product) return false;
-
-    const normalizedSearch = searchTerm.trim().toLowerCase();
-    const searchableText = [
-      switch2Product.name,
-      switch2Product.brand,
-      switch2Product.category,
-      switch2Product.status,
-      switch2Product.spec,
-      switch2Product.shortDescription,
-      'Nintendo Switch 2 Standard Edition Mario Kart World Bundle Pro Controller Joy-Con Camera Protection Plan',
-    ]
-      .join(' ')
-      .toLowerCase();
-
-    const matchesCategory =
-      activeCategory === '全部' ||
-      activeCategory === 'Switch' ||
-      (activeCategory === '预订' && switch2Product.status === '预订') ||
-      (activeCategory === '现货' && switch2Product.status === '现货');
-    const matchesBrand = activeBrand === '全部品牌' || activeBrand === 'Nintendo';
-    const matchesSearch = !normalizedSearch || searchableText.includes(normalizedSearch);
-
-    return matchesCategory && matchesBrand && matchesSearch;
-  }, [activeBrand, activeCategory, searchTerm, switch2Product]);
   const displayProducts = useMemo(
     () => filteredProducts,
     [filteredProducts],
   );
-  const displayedProductCount = displayProducts.length + (shouldShowSwitch2Configurator ? 1 : 0);
+  const displayedProductCount = displayProducts.length;
 
   useEffect(() => {
     const description = 'Buy Nintendo Switch 2 with fast shipping and competitive pricing. Available in Standard and Bundle editions.';
     const metaDescription = document.querySelector('meta[name="description"]');
     const existingSchema = document.getElementById('switch-2-product-schema');
 
-    if (currentSite?.key !== 'electronics') {
+    if (!isSwitch2Detail) {
       document.title = 'Duo Deals｜美妆数码好价';
       metaDescription?.setAttribute(
         'content',
@@ -286,7 +260,7 @@ export default function App() {
     if (!existingSchema) {
       document.head.appendChild(schemaScript);
     }
-  }, [currentSite]);
+  }, [isSwitch2Detail]);
 
   const inquiryDraft = useMemo(() => {
     if (cartItems.length === 0) return '';
@@ -394,7 +368,53 @@ export default function App() {
         onSearchChange={setSearchTerm}
       />
 
-      {!currentSite ? (
+      {isSwitch2Detail ? (
+        <div className="min-h-screen bg-[#f7f8fa]">
+          <main className="mx-auto max-w-7xl px-4 py-5 md:py-8">
+            <button
+              type="button"
+              onClick={() => navigate('/electronics')}
+              className="mb-5 inline-flex items-center gap-1.5 text-sm font-bold text-slate-600 hover:text-slate-950"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              返回电子产品专区
+            </button>
+
+            <section className="mb-6 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
+              <div className="grid items-center gap-4 md:grid-cols-[0.9fr_1.1fr]">
+                <div className="px-6 py-8 md:px-10 md:py-12">
+                  <p className="text-sm font-black uppercase tracking-normal text-slate-500">Nintendo</p>
+                  <h1 className="mt-3 text-4xl font-black leading-tight text-slate-950 md:text-6xl">Nintendo Switch 2</h1>
+                  <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
+                    选择版本、配件、保护计划和数量后加入询价清单。最终价格、库存和取货方式以微信确认为准。
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {['全新现货 / 预订可询', '微信确认价格', 'WashU 附近线下自提或送货上门'].map((tag) => (
+                      <span key={tag} className="rounded-full bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-white to-slate-100 p-6 md:p-10">
+                  <img
+                    src={switch2Product.image}
+                    alt="Nintendo Switch 2"
+                    className="mx-auto aspect-[1.2/1] w-full max-w-xl object-contain"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <Switch2Configurator
+              product={switch2Product}
+              onAddToCart={(item) => addToCart(item)}
+              onBuyNow={(item) => addToCart(item, true)}
+            />
+          </main>
+          <Footer site={siteConfigs.electronics} />
+        </div>
+      ) : !currentSite ? (
         <SiteGateway onNavigate={navigate} />
       ) : (
         <div className={`min-h-screen ${currentSite.pageClass}`}>
@@ -425,6 +445,7 @@ export default function App() {
                       product={product}
                       onAddToCart={(item) => addToCart(item)}
                       onInquiry={(item) => addToCart(item, true)}
+                      onViewDetails={navigate}
                     />
                     ))}
                   </div>
@@ -442,20 +463,6 @@ export default function App() {
                       </div>
                     ))}
                   </div>
-
-                  {shouldShowSwitch2Configurator ? (
-                    <div className="mt-8">
-                      <div className="mb-4">
-                        <p className="text-sm font-bold text-slate-500">Premium Product Builder</p>
-                        <h2 className="text-2xl font-black text-slate-950">Nintendo Switch 2 配置询价</h2>
-                      </div>
-                      <Switch2Configurator
-                        product={switch2Product}
-                        onAddToCart={(item) => addToCart(item)}
-                        onBuyNow={(item) => addToCart(item, true)}
-                      />
-                    </div>
-                  ) : null}
                 </>
               ) : (
                 <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-10 text-center">

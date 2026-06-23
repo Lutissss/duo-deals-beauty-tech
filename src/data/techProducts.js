@@ -58,6 +58,7 @@ export const techProducts = [
     price: '微信询价',
     spec: 'Switch 2 / 套装和库存可询',
     image: switch2SampleImage,
+    detailPath: '/electronics/switch-2',
     shortDescription: 'Switch 2 主机样图，套装、库存和价格请微信确认。',
     description: 'Nintendo Switch 2 主机可按套装和活动价预订。',
     reminder: '电子产品建议当面验货，价格和库存以微信确认为准。',

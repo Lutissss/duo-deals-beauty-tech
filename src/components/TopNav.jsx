@@ -28,7 +28,7 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
 
           <div className="hidden items-center gap-1 md:flex">
             {navItems.map(({ label, path }) => {
-              const isActive = route === path;
+              const isActive = route === path || (path !== '/' && route.startsWith(`${path}/`));
 
               return (
                 <button
@@ -96,7 +96,7 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
 
         <div className="mt-2 flex gap-2 overflow-x-auto pb-1 md:hidden scrollbar-none">
           {navItems.map(({ label, path, icon: Icon }) => {
-            const isActive = route === path;
+            const isActive = route === path || (path !== '/' && route.startsWith(`${path}/`));
 
             return (
             <button
