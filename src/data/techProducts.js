@@ -1,6 +1,9 @@
 import ipadProSampleImage from '../assets/ipad-pro-sample.jpg';
 import switch2SampleImage from '../assets/switch-2-sample.jpg';
 
+const appleStoreImage = (code) =>
+  `https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/${code}?wid=900&hei=900&fmt=jpeg&qlt=90`;
+
 export const techProducts = [
   {
     id: 'tech-iphone-17-pro',
@@ -12,7 +15,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: 'Pro / Pro Max / 容量可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=iPhone+17+Pro',
+    image: appleStoreImage('iphone-17-pro-model-unselect-gallery-1-202509'),
     detailPath: '/electronics/iphone-17-pro',
     optionGroups: [
       { name: '机型', values: ['iPhone 17 Pro', 'iPhone 17 Pro Max'] },
@@ -34,7 +37,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '轻薄机型 / 容量可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=iPhone+Air',
+    image: appleStoreImage('iphone-air-finish-unselect-gallery-1-202509'),
     detailPath: '/electronics/iphone-air',
     optionGroups: [
       { name: '容量', values: ['256GB', '512GB', '1TB'] },
@@ -55,7 +58,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '标准款 / 容量可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=iPhone+17',
+    image: appleStoreImage('iphone-17-finish-unselect-gallery-1-202509'),
     detailPath: '/electronics/iphone-17',
     optionGroups: [
       { name: '容量', values: ['256GB', '512GB'] },
@@ -76,7 +79,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '入门新款 / 容量可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=iPhone+17e',
+    image: appleStoreImage('iphone-17e-finish-unselect-gallery-1-202603'),
     detailPath: '/electronics/iphone-17e',
     optionGroups: [
       { name: '容量', values: ['128GB', '256GB', '512GB'] },
@@ -97,7 +100,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '11 英寸 / 13 英寸 / 容量可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=iPad+Air',
+    image: appleStoreImage('ipad-air-model-unselect-gallery-1-202405'),
     detailPath: '/electronics/ipad-air',
     optionGroups: [
       { name: '尺寸', values: ['11 英寸', '13 英寸'] },
@@ -119,7 +122,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '基础款 iPad / 容量可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=iPad',
+    image: appleStoreImage('ipad-model-unselect-gallery-1-202503'),
     detailPath: '/electronics/ipad',
     optionGroups: [
       { name: '容量', values: ['128GB', '256GB', '512GB'] },
@@ -140,7 +143,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '便携小屏 / 容量可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=iPad+mini',
+    image: appleStoreImage('ipad-mini-finish-unselect-gallery-1-202410'),
     detailPath: '/electronics/ipad-mini',
     optionGroups: [
       { name: '容量', values: ['128GB', '256GB', '512GB'] },
@@ -161,7 +164,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '轻便 MacBook / 配置可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=MacBook+Neo',
+    image: appleStoreImage('macbook-air-size-unselect-202601-gallery-1'),
     detailPath: '/electronics/macbook-neo',
     optionGroups: [
       { name: '内存', values: ['8GB', '16GB', '24GB'] },
@@ -182,7 +185,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '13 英寸 / 15 英寸 / 配置可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=MacBook+Air',
+    image: appleStoreImage('macbook-air-size-unselect-202601-gallery-1'),
     detailPath: '/electronics/macbook-air',
     optionGroups: [
       { name: '尺寸', values: ['13 英寸', '15 英寸'] },
@@ -204,7 +207,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '14 英寸 / 16 英寸 / Pro 配置可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=MacBook+Pro',
+    image: appleStoreImage('mac-macbook-pro-size-unselect-202601-gallery-1'),
     detailPath: '/electronics/macbook-pro',
     optionGroups: [
       { name: '尺寸', values: ['14 英寸', '16 英寸'] },
@@ -226,7 +229,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '一体机 / 颜色和配置可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=iMac',
+    image: appleStoreImage('imac-color-unselect-202601-gallery-1'),
     detailPath: '/electronics/imac',
     optionGroups: [
       { name: '内存', values: ['16GB', '24GB', '32GB'] },
@@ -247,7 +250,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '小主机 / 配置可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Mac+mini',
+    image: appleStoreImage('mac-mini-chip-unselect-202601-gallery-1'),
     detailPath: '/electronics/mac-mini',
     optionGroups: [
       { name: '芯片配置', values: ['基础配置', 'Pro 配置'] },
@@ -268,7 +271,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '高性能桌面主机 / 配置可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Mac+Studio',
+    image: appleStoreImage('mac-studio-chip-unselect-202601-gallery-1'),
     detailPath: '/electronics/mac-studio',
     optionGroups: [
       { name: '芯片配置', values: ['Max 配置', 'Ultra 配置'] },
@@ -289,7 +292,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: 'Apple 显示器 / 支架可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Studio+Display',
+    image: appleStoreImage('studio-display-gallery-1-202603'),
     detailPath: '/electronics/studio-display',
     optionGroups: [
       { name: '玻璃', values: ['标准玻璃', '纳米纹理玻璃'] },
@@ -309,7 +312,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '高端显示器 / 支架可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Display+XDR',
+    image: appleStoreImage('studio-display-og-202603'),
     detailPath: '/electronics/studio-display-xdr',
     optionGroups: [
       { name: '玻璃', values: ['标准玻璃', '纳米纹理玻璃'] },
@@ -329,7 +332,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '尺寸 / 连接方式 / 表带可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Apple+Watch+S11',
+    image: appleStoreImage('watch-compare-s11-202509'),
     detailPath: '/electronics/apple-watch-series-11',
     optionGroups: [
       { name: '尺寸', values: ['小尺寸', '大尺寸'] },
@@ -351,7 +354,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '入门款 Apple Watch / 版本可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Apple+Watch+SE+3',
+    image: appleStoreImage('watch-compare-se-202509'),
     detailPath: '/electronics/apple-watch-se-3',
     optionGroups: [
       { name: '尺寸', values: ['小尺寸', '大尺寸'] },
@@ -372,7 +375,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: 'Ultra 新款 / 表带可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Apple+Watch+Ultra+3',
+    image: appleStoreImage('watch-compare-ultra3-202509'),
     detailPath: '/electronics/apple-watch-ultra-3',
     optionGroups: [
       { name: '表壳颜色', values: ['自然钛金属', '黑色钛金属'] },
@@ -392,7 +395,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: 'USB-C / 主动降噪',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=AirPods+Pro+3',
+    image: appleStoreImage('airpods-pro-3-hero-select-202509'),
     detailPath: '/electronics/airpods-pro-3',
     optionGroups: [
       { name: '版本', values: ['标准包装'] },
@@ -412,7 +415,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '头戴式耳机 / 颜色可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=AirPods+Max+2',
+    image: appleStoreImage('airpods-max-hero-select-202409'),
     detailPath: '/electronics/airpods-max-2',
     optionGroups: [
       { name: '颜色', values: ['午夜色', '星光色', '蓝色', '紫色', '橙色', '其他颜色微信确认'] },
@@ -431,7 +434,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '标准版 / 主动降噪版可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=AirPods+4',
+    image: appleStoreImage('airpods-4-anc-select-202409'),
     detailPath: '/electronics/airpods-4',
     optionGroups: [
       { name: '版本', values: ['标准版', '主动降噪版'] },
@@ -451,7 +454,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: 'M5 / 空间计算设备 / 配件可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Apple+Vision+Pro',
+    image: 'https://www.apple.com/v/apple-vision-pro/k/images/overview/hero/hero__cvgr5aj1ttsi_large.jpg',
     detailPath: '/electronics/apple-vision-pro',
     optionGroups: [
       { name: '容量', values: ['256GB', '512GB', '1TB'] },
@@ -472,7 +475,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '客厅影音设备 / 容量可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=Apple+TV+4K',
+    image: 'https://www.apple.com/v/tv-home/q/images/overview/apple_tv_4k__b30wcqp0pdle_large.jpg',
     detailPath: '/electronics/apple-tv-4k',
     optionGroups: [
       { name: '容量', values: ['64GB', '128GB'] },
@@ -492,7 +495,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '智能音箱 / 颜色可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=HomePod',
+    image: 'https://www.apple.com/v/tv-home/q/images/overview/homepod__eam53jjm772a_large.jpg',
     detailPath: '/electronics/homepod',
     optionGroups: [
       { name: '颜色', values: ['白色', '午夜色'] },
@@ -512,7 +515,7 @@ export const techProducts = [
     status: '预订',
     price: '微信询价',
     spec: '小型智能音箱 / 颜色可选',
-    image: 'https://placehold.co/900x900/f8fafc/111827?text=HomePod+mini',
+    image: 'https://www.apple.com/v/homepod-mini/j/images/overview/hero_homepod_white__fbci8wwv3oi2_medium.png',
     detailPath: '/electronics/homepod-mini',
     optionGroups: [
       { name: '颜色', values: ['白色', '蓝色', '橙色', '黄色', '午夜色'] },
