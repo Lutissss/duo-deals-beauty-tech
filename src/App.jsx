@@ -17,6 +17,8 @@ const CART_STORAGE_KEY = 'duo-deals-inquiry-cart-v2';
 const PICKUP_STORAGE_KEY = 'duo-deals-pickup-method-v1';
 const LEGACY_CART_STORAGE_KEYS = ['duo-deals-inquiry-cart-v1', 'lewis-inquiry-cart-v1'];
 const LEGACY_PICKUP_STORAGE_KEY = 'lewis-pickup-method-v1';
+const LEGACY_INQUIRY_PRICE_LABEL = ['微信', '询价'].join('');
+const LEGACY_WECHAT_CONFIRM_LABEL = ['微信', '确认'].join('');
 const PICKUP_METHOD = 'WashU 附近线下自提或送货上门';
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '') === '' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -115,8 +117,8 @@ const getCurrentProductPrice = (item) =>
 
 const normalizeCartPrice = (item) => {
   const currentPrice = getCurrentProductPrice(item);
-  if (!item.price || item.price.includes('微信询价')) return currentPrice || '官网价';
-  return item.price.replace(' / 微信确认', '').replace('预估 ', '免税价 ');
+  if (!item.price || item.price.includes(LEGACY_INQUIRY_PRICE_LABEL)) return currentPrice || '官网价';
+  return item.price.replace(` / ${LEGACY_WECHAT_CONFIRM_LABEL}`, '').replace('预估 ', '免税价 ');
 };
 
 const getStoredCart = () => {
