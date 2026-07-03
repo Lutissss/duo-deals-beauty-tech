@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Nintendo Switch Mario Bundle</title>
+  <desc id="desc">Product style image for Nintendo Switch Mario bundle</desc>
+  <rect width="900" height="900" fill="#fff"/>
+  <rect x="138" y="220" width="430" height="350" rx="28" fill="#ef4444"/>
+  <rect x="172" y="260" width="362" height="228" rx="18" fill="#111827"/>
+  <rect x="205" y="292" width="296" height="164" rx="12" fill="#60a5fa"/>
+  <rect x="120" y="594" width="500" height="90" rx="24" fill="#111827"/>
+  <rect x="88" y="520" width="92" height="210" rx="42" fill="#ef4444"/>
+  <rect x="558" y="520" width="92" height="210" rx="42" fill="#ef4444"/>
+  <circle cx="134" cy="590" r="16" fill="#111827"/>
+  <circle cx="604" cy="590" r="16" fill="#111827"/>
+  <rect x="610" y="246" width="170" height="242" rx="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="6"/>
+  <rect x="630" y="266" width="130" height="98" rx="14" fill="#ef4444"/>
+  <text x="695" y="328" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#fff">MARIO</text>
+  <text x="695" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#111827">BUNDLE</text>
+  <text x="450" y="790" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="900" fill="#111827">Nintendo Switch</text>
+</svg>

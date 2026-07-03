@@ -1,4 +1,4 @@
-import { ArrowRight, BadgeCheck, MapPin, PackageCheck, Sparkles, Smartphone } from 'lucide-react';
+import { ArrowRight, BadgeCheck, MapPin, PackageCheck, ShoppingBasket, Sparkles, Smartphone } from 'lucide-react';
 import beautyHomeImage from '../assets/beauty-home.png';
 import techHomeImage from '../assets/tech-home.png';
 
@@ -23,6 +23,15 @@ const entries = [
     icon: Smartphone,
     image: techHomeImage,
   },
+  {
+    title: 'Market',
+    chineseTitle: '市场百货专区',
+    description: '饮料、零食、纸巾、厨房日用品，WashU 附近顺手补货',
+    buttonText: '进入市场百货',
+    path: '/market',
+    icon: ShoppingBasket,
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85',
+  },
 ];
 
 export default function SiteGateway({ onNavigate }) {
@@ -38,14 +47,14 @@ export default function SiteGateway({ onNavigate }) {
             <h1 className="text-4xl font-black leading-tight text-slate-950 md:text-6xl">Duo Deals｜美妆数码好价</h1>
             <p className="mt-4 text-xl font-bold leading-8 text-slate-900">美国本地美妆护肤 & 电子数码好价精选</p>
             <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
-              美国本地好价选品站，美妆护肤和电子产品分区展示。页面标注官网价，免税购买，标多少按多少结算。选好商品后复制清单微信发送 Lutissss，由我们汇总购买和配送。
+              美国本地好价选品站，美妆护肤、电子产品和市场百货分区展示。页面标注官网价或常见门店价，选好商品后复制清单微信发送 Lutissss，由我们汇总购买和配送。
             </p>
           </div>
         </div>
       </section>
 
       <section className="px-4 py-3">
-        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-2">
+        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
           {entries.map((entry) => {
             const Icon = entry.icon;
 

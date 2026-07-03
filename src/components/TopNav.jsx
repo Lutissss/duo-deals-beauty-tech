@@ -1,13 +1,14 @@
-import { Home, MonitorSmartphone, Search, ShoppingBag, Sparkles, UserRound, X } from 'lucide-react';
+import { Home, MonitorSmartphone, Search, ShoppingBag, ShoppingBasket, Sparkles, UserRound, X } from 'lucide-react';
 
 const navItems = [
   { label: '首页', path: '/', icon: Home },
   { label: '美妆专区', path: '/beauty', icon: Sparkles },
   { label: '电子产品专区', path: '/electronics', icon: MonitorSmartphone },
+  { label: '市场百货', path: '/market', icon: ShoppingBasket },
 ];
 
 export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searchTerm = '', onSearchChange }) {
-  const showSearch = route === '/beauty' || route === '/electronics' || route.startsWith('/electronics/');
+  const showSearch = route === '/beauty' || route === '/electronics' || route === '/market' || route.startsWith('/electronics/');
 
   return (
     <nav className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 px-3 py-2 shadow-sm shadow-slate-200/40 backdrop-blur">

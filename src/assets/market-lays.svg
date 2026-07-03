@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Lay's Classic Chips</title>
+  <desc id="desc">Product style image for Lay's Classic potato chips</desc>
+  <rect width="900" height="900" fill="#fff"/>
+  <path d="M254 116h392l55 668H199l55-668Z" fill="#facc15"/>
+  <path d="M254 116h392l-34 74H288l-34-74Z" fill="#fde68a"/>
+  <path d="M199 784h502l-44 56H243l-44-56Z" fill="#eab308"/>
+  <circle cx="450" cy="326" r="142" fill="#f59e0b"/>
+  <circle cx="450" cy="326" r="102" fill="#ef4444"/>
+  <text x="450" y="342" text-anchor="middle" font-family="Arial, sans-serif" font-size="94" font-weight="900" fill="#fff">Lay's</text>
+  <text x="450" y="492" text-anchor="middle" font-family="Arial, sans-serif" font-size="64" font-weight="700" fill="#1f2937">Classic</text>
+  <ellipse cx="360" cy="640" rx="86" ry="34" fill="#fef3c7" stroke="#f59e0b" stroke-width="6" transform="rotate(-18 360 640)"/>
+  <ellipse cx="470" cy="632" rx="96" ry="36" fill="#fde68a" stroke="#f59e0b" stroke-width="6" transform="rotate(10 470 632)"/>
+  <ellipse cx="560" cy="680" rx="88" ry="34" fill="#fef3c7" stroke="#f59e0b" stroke-width="6" transform="rotate(-8 560 680)"/>
+</svg>

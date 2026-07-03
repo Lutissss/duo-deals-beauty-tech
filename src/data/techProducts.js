@@ -1,4 +1,6 @@
 import ipadProSampleImage from '../assets/ipad-pro-sample.jpg';
+import appleCareImage from '../assets/applecare-plus.svg';
+import switchMarioImage from '../assets/tech-switch-mario.svg';
 import switch2SampleImage from '../assets/switch-2-sample.jpg';
 
 const appleStoreImage = (code) =>
@@ -535,7 +537,7 @@ export const techProducts = [
     status: '现货',
     price: '官网 $599.99',
     spec: 'Blue Blush 套装',
-    image: 'https://placehold.co/900x900/e6edf5/1f2937?text=Dyson+Airwrap',
+    image: 'https://cdn.tirabeauty.com/v2/billowing-snowflake-434234/tira-p/wrkr/products/pictures/item/free/resize-w%3A600/1126208/mdenTvZXk-1126208_1.jpg',
     shortDescription: '热门造型器现货，支持当面验货后确认。',
     description: '适合日常卷发、顺发和蓬松造型。电子产品建议当面检查外观、配件和通电情况。',
     reminder: '贵重电子产品请尽量选择自提或当面验货，页面标价为免税到手价。',
@@ -587,7 +589,7 @@ export const techProducts = [
     status: '预订',
     price: '官网起 $499.99',
     spec: 'Mario Red / 游戏套装可询',
-    image: 'https://placehold.co/900x900/f3e7e4/1f2937?text=Switch+Mario',
+    image: switchMarioImage,
     shortDescription: 'Switch 热门套装，适合自用、送礼和宿舍娱乐。',
     description: 'Nintendo Switch Mario 套装可按颜色、游戏组合和活动价预订。',
     reminder: 'Switch 套装按官网价免税购买，具体版本以可购买情况为准。',
@@ -602,7 +604,7 @@ export const techProducts = [
     status: '预订',
     price: '官网 $149.99',
     spec: '24,000mAh / 140W',
-    image: 'https://placehold.co/900x900/f4efe8/1f2937?text=Anker+737',
+    image: 'https://fastly.rentio.jp/storage/tuphhi9oaoji1pxlt7v2b1bp2pc6?canvas=1%3A1.2&dpr=2&fit=bounds&height=600&quality=90&width=600',
     shortDescription: '适合电脑、平板和手机出门备用，支持预订。',
     description: '高功率移动电源，适合长时间外出、旅行和校园使用。',
     reminder: '预订商品需要先确认到货时间，页面标价为免税到手价。',
@@ -617,7 +619,7 @@ export const techProducts = [
     status: '预订',
     price: '官网按型号',
     spec: 'V8 / V11 / V15 型号可询',
-    image: 'https://placehold.co/900x900/e7ecea/1f2937?text=Dyson+Vacuum',
+    image: 'https://assets.wfcdn.com/im/64545891/resize-h755-w755%5Ecompr-r85/2779/277913922/Dyson+V15+Detect.jpg',
     shortDescription: '家用清洁电器，型号和套装可加入清单后确认。',
     description: 'Dyson 家用吸尘器可按型号和套装预订，适合公寓和家庭清洁。',
     reminder: '家用电器请确认型号、配件和保修说明。',
@@ -632,7 +634,7 @@ export const techProducts = [
     status: '现货',
     price: '$20 / 年',
     spec: '随电子产品附带购买 / $20 一年',
-    image: 'https://placehold.co/900x900/eef3f7/1f2937?text=AC%2B+Add-on',
+    image: appleCareImage,
     shortDescription: '可随电子产品一起加入购买清单，具体适用商品可加入清单后确认。',
     description: 'AC+ 附带购买选项，适用于部分电子产品咨询场景。',
     reminder: 'AC+ 是否适用、覆盖内容和购买方式请以购买清单确认为准。',

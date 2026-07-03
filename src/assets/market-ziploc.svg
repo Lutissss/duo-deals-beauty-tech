@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Ziploc Freezer Bags</title>
+  <desc id="desc">Product style image for Ziploc gallon freezer bags</desc>
+  <rect width="900" height="900" fill="#fff"/>
+  <rect x="120" y="294" width="660" height="312" rx="30" fill="#0f766e"/>
+  <path d="M120 294h660v146H120z" fill="#0f172a"/>
+  <path d="M540 294h240v312H540z" fill="#06b6d4"/>
+  <text x="330" y="418" text-anchor="middle" font-family="Arial, sans-serif" font-size="102" font-weight="900" fill="#fff">Ziploc</text>
+  <text x="660" y="396" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="900" fill="#fff">28</text>
+  <text x="660" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#fff">FREEZER</text>
+  <text x="660" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#fff">GALLON</text>
+  <path d="M250 520c92-40 205-42 340-5" fill="none" stroke="#67e8f9" stroke-width="14" stroke-linecap="round"/>
+  <path d="M250 552c92-40 205-42 340-5" fill="none" stroke="#bae6fd" stroke-width="10" stroke-linecap="round"/>
+</svg>

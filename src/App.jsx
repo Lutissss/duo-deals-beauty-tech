@@ -10,6 +10,7 @@ import SiteGateway from './components/SiteGateway.jsx';
 import Switch2Configurator from './components/Switch2Configurator.jsx';
 import TopNav from './components/TopNav.jsx';
 import { beautyProducts } from './data/beautyProducts.js';
+import { marketProducts } from './data/marketProducts.js';
 import { techProducts } from './data/techProducts.js';
 import { ArrowLeft, BadgeDollarSign, PackageCheck, ShieldCheck, Truck, WalletCards } from 'lucide-react';
 
@@ -59,6 +60,20 @@ const siteConfigs = {
     products: techProducts,
     pageClass: 'bg-[#f7f8fa]',
   },
+  market: {
+    key: 'market',
+    path: '/market',
+    name: '市场百货专区',
+    shortName: '市场百货',
+    section: 'Market',
+    sectionLabel: '市场百货',
+    eyebrow: '市场百货专区',
+    heroTitle: '饮料 / 零食 / 纸巾 / 厨房日用品，本地顺手补货',
+    description: '本区参考本地配送平台的便利店和 grocery 选品逻辑，提供饮料、零食、方便速食、纸品和厨房清洁用品。页面标注常见门店价，最终以当天采购清单确认为准。',
+    categories: ['全部', '饮料', '零食', '方便速食', '日用纸品', '厨房清洁', '现货', '预订'],
+    products: marketProducts,
+    pageClass: 'bg-[#fafbf7]',
+  },
 };
 
 const getRouteFromLocation = () => {
@@ -71,6 +86,7 @@ const getRouteFromLocation = () => {
 
   if (path === '/beauty' || path === '/beauty/') return '/beauty';
   if (path === '/electronics' || path === '/electronics/') return '/electronics';
+  if (path === '/market' || path === '/market/') return '/market';
   const detailRoute = techProducts.find((product) => product.detailPath === path || `${product.detailPath}/` === path)?.detailPath;
   if (detailRoute) return detailRoute;
   return '/';
@@ -110,7 +126,7 @@ const switch2Schema = {
   },
 };
 
-const allProducts = [...beautyProducts, ...techProducts];
+const allProducts = [...beautyProducts, ...techProducts, ...marketProducts];
 
 const getCurrentProductPrice = (item) =>
   allProducts.find((product) => product.id === item.id)?.price;
@@ -154,7 +170,8 @@ export default function App() {
   const [cartItems, setCartItems] = useState(getStoredCart);
 
   const isSwitch2Detail = route === '/electronics/switch-2';
-  const currentSite = route === '/beauty' ? siteConfigs.beauty : route === '/electronics' ? siteConfigs.electronics : null;
+  const currentSite =
+    route === '/beauty' ? siteConfigs.beauty : route === '/electronics' ? siteConfigs.electronics : route === '/market' ? siteConfigs.market : null;
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const switch2Product = siteConfigs.electronics.products.find((product) => product.id === 'tech-switch-oled');
   const detailProduct = siteConfigs.electronics.products.find((product) => product.detailPath === route);
@@ -284,6 +301,7 @@ export default function App() {
     const sections = [
       { section: 'Beauty', title: '【美妆护肤】' },
       { section: 'Tech', title: '【电子产品】' },
+      { section: 'Market', title: '【市场百货】' },
     ];
 
     const groupedText = sections

@@ -1,18 +1,25 @@
-import { ArrowLeft, ArrowRight, BadgeCheck, Sparkles, Smartphone } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BadgeCheck, ShoppingBasket, Sparkles, Smartphone } from 'lucide-react';
 import beautyHomeImage from '../assets/beauty-home.png';
 import techHomeImage from '../assets/tech-home.png';
 
 export default function Header({ site, onNavigate }) {
   const isBeauty = site.key === 'beauty';
-  const SiteIcon = isBeauty ? Sparkles : Smartphone;
-  const heroImage = isBeauty ? beautyHomeImage : techHomeImage;
-  const heroLabel = isBeauty ? '美妆护肤' : '电子产品';
+  const isMarket = site.key === 'market';
+  const SiteIcon = isBeauty ? Sparkles : isMarket ? ShoppingBasket : Smartphone;
+  const heroImage = isBeauty
+    ? beautyHomeImage
+    : isMarket
+      ? 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85'
+      : techHomeImage;
+  const heroLabel = isBeauty ? '美妆护肤' : isMarket ? '市场百货' : '电子产品';
   const heroSubtitle = isBeauty
     ? '护肤、彩妆、香水、套装，本地好价精选。'
-    : 'Apple、Dyson、Switch 和日常数码配件。';
+    : isMarket
+      ? '饮料、零食、纸巾和厨房日用品，WashU 附近顺手补货。'
+      : 'Apple、Dyson、Switch 和日常数码配件。';
 
   return (
-    <header className={isBeauty ? 'bg-[#fbfaf7]' : 'bg-[#f7f8fa]'}>
+    <header className={isBeauty ? 'bg-[#fbfaf7]' : isMarket ? 'bg-[#fafbf7]' : 'bg-[#f7f8fa]'}>
       <div className="mx-auto max-w-7xl px-4 py-5 md:py-8">
         <button
           type="button"
@@ -47,14 +54,14 @@ export default function Header({ site, onNavigate }) {
 
             <div
               className={`relative min-h-[260px] self-stretch overflow-hidden ${
-                isBeauty ? 'bg-[#f7e7e9]' : 'bg-[#eef5fa]'
+                isBeauty ? 'bg-[#f7e7e9]' : isMarket ? 'bg-[#f3f6ed]' : 'bg-[#eef5fa]'
               } md:min-h-[360px]`}
             >
               <img
                 src={heroImage}
                 alt={site.name}
                 className={`absolute inset-0 h-full w-full object-cover ${
-                  isBeauty ? 'object-[66%_center]' : 'object-[62%_center]'
+                  isBeauty ? 'object-[66%_center]' : isMarket ? 'object-center' : 'object-[62%_center]'
                 }`}
               />
               <div className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/95 text-slate-950 shadow-sm">

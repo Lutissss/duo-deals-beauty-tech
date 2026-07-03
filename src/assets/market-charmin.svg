@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Charmin Ultra Soft</title>
+  <desc id="desc">Product style image for Charmin toilet paper</desc>
+  <rect width="900" height="900" fill="#fff"/>
+  <rect x="138" y="218" width="624" height="464" rx="68" fill="#eff6ff" stroke="#bfdbfe" stroke-width="8"/>
+  <circle cx="295" cy="450" r="128" fill="#fff" stroke="#dbeafe" stroke-width="8"/>
+  <circle cx="450" cy="450" r="128" fill="#fff" stroke="#dbeafe" stroke-width="8"/>
+  <circle cx="605" cy="450" r="128" fill="#fff" stroke="#dbeafe" stroke-width="8"/>
+  <path d="M182 292h536v160H182z" fill="#2563eb"/>
+  <text x="450" y="394" text-anchor="middle" font-family="Arial, sans-serif" font-size="94" font-weight="900" fill="#fff">Charmin</text>
+  <text x="450" y="548" text-anchor="middle" font-family="Arial, sans-serif" font-size="58" font-weight="900" fill="#2563eb">Ultra Soft</text>
+  <text x="450" y="620" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#64748b">Bathroom Tissue</text>
+</svg>
