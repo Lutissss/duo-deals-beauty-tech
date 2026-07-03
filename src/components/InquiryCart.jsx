@@ -24,7 +24,7 @@ export default function InquiryCart({
         className="fixed bottom-[calc(env(safe-area-inset-bottom)+16px)] right-4 z-30 flex h-14 items-center gap-2 rounded-full bg-slate-950 px-5 font-semibold text-white shadow-xl shadow-slate-300"
       >
         <ShoppingBag className="h-5 w-5" />
-        询价清单
+        购买清单
         {totalQuantity > 0 ? (
           <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-emerald-500 px-2 text-xs">{totalQuantity}</span>
         ) : null}
@@ -35,14 +35,14 @@ export default function InquiryCart({
           <div className="absolute inset-x-0 bottom-0 mx-auto max-h-[88vh] max-w-screen-sm overflow-hidden rounded-t-[28px] bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
               <div>
-                <p className="text-xs text-slate-500">微信询价</p>
+                <p className="text-xs text-slate-500">微信发送给 Lutissss</p>
                 <h2 className="text-lg font-bold text-slate-950">已选择商品</h2>
               </div>
               <button
                 type="button"
                 onClick={onToggle}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700"
-                aria-label="关闭询价清单"
+                aria-label="关闭购买清单"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -52,8 +52,8 @@ export default function InquiryCart({
               {items.length === 0 ? (
                 <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-8 text-center">
                   <Clipboard className="mx-auto h-8 w-8 text-slate-400" />
-                  <p className="mt-3 font-semibold text-slate-800">询价清单还是空的</p>
-                  <p className="mt-1 text-sm text-slate-500">把感兴趣的商品加入清单后，可一键生成微信询价内容。</p>
+                  <p className="mt-3 font-semibold text-slate-800">购买清单还是空的</p>
+                  <p className="mt-1 text-sm text-slate-500">把想买的商品加入清单后，可一键生成微信购买信息。</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -135,7 +135,7 @@ export default function InquiryCart({
 
               <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
                 <div className="flex flex-col gap-3">
-                  <p className="font-semibold text-slate-950">微信询价内容</p>
+                  <p className="font-semibold text-slate-950">微信购买信息</p>
                   <div className="grid grid-cols-[1fr_auto] gap-2">
                     <button
                       type="button"
@@ -143,7 +143,7 @@ export default function InquiryCart({
                       disabled={items.length === 0}
                       className="h-10 rounded-xl bg-slate-950 px-3 text-sm font-semibold text-white disabled:bg-slate-300"
                     >
-                      生成微信询价内容
+                      生成购买信息
                     </button>
                     <button
                       type="button"
@@ -152,7 +152,7 @@ export default function InquiryCart({
                       className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-3 text-sm font-semibold text-white disabled:bg-slate-300"
                     >
                       <Copy className="h-4 w-4" />
-                      {copied ? '已复制' : '复制询价内容'}
+                      {copied ? '已复制' : '复制购买信息'}
                     </button>
                   </div>
                 </div>

@@ -123,7 +123,7 @@ export default function ProductConfigurator({ product, onAddToCart, onBuyNow }) 
                 onClick={() => onBuyNow(configuredProduct)}
                 className="h-12 rounded-xl bg-slate-950 text-sm font-black text-white shadow-sm active:bg-slate-800"
               >
-                微信询价
+                加入并打开清单
               </button>
             </div>
           </div>

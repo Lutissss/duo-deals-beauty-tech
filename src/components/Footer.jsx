@@ -1,6 +1,6 @@
 import { AlertCircle } from 'lucide-react';
 
-const serviceNotes = ['WashU 附近线下自提或送货上门', '微信确认价格', '现货优先，也支持预订', '商品价格随活动和库存变化'];
+const serviceNotes = ['WashU 附近线下自提或送货上门', '官网价免税', '标多少按多少结算', '选好后复制清单微信发送 Lutissss'];
 
 export default function Footer({ site }) {
   return (
@@ -19,7 +19,7 @@ export default function Footer({ site }) {
           ))}
         </ul>
         <p className="mt-4 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-800 ring-1 ring-slate-200">
-          Duo Deals｜{site?.shortName || '美妆数码'}联系方式：请添加微信：你的微信号
+          Duo Deals｜{site?.shortName || '美妆数码'}联系方式：请添加微信：Lutissss
         </p>
       </div>
     </footer>

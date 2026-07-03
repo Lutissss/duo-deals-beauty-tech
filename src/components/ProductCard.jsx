@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ArrowRight, MessageCircle, ShoppingBag } from 'lucide-react';
+import { ArrowRight, ShoppingBag } from 'lucide-react';
 
 export default function ProductCard({ product, onAddToCart, onInquiry, onViewDetails }) {
   const defaultOptions = useMemo(
@@ -121,7 +121,7 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
             type="button"
             onClick={() => (hasDetailPage ? onViewDetails(product.detailPath) : onAddToCart(selectedProduct))}
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-950 shadow-sm transition active:scale-95"
-            aria-label={hasDetailPage ? '查看配置' : '加入询价清单'}
+            aria-label={hasDetailPage ? '查看配置' : '加入购买清单'}
           >
             <ShoppingBag className="h-4 w-4" />
           </button>
@@ -133,8 +133,8 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
             onClick={() => (hasDetailPage ? onViewDetails(product.detailPath) : onInquiry(selectedProduct))}
             className="inline-flex h-9 items-center justify-center gap-1 rounded-xl bg-slate-950 text-xs font-bold text-white shadow-sm active:bg-slate-800"
           >
-            {hasDetailPage ? <ArrowRight className="h-3.5 w-3.5" /> : <MessageCircle className="h-3.5 w-3.5" />}
-            {hasDetailPage ? '查看配置' : '微信询价'}
+            {hasDetailPage ? <ArrowRight className="h-3.5 w-3.5" /> : <ShoppingBag className="h-3.5 w-3.5" />}
+            {hasDetailPage ? '查看配置' : '加入购买清单'}
           </button>
         </div>
       </div>

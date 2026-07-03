@@ -38,7 +38,7 @@ const siteConfigs = {
     sectionLabel: '美妆护肤',
     eyebrow: '美妆护肤专区',
     heroTitle: '护肤 / 彩妆 / 香水 / 套装，美国本地好价精选',
-    description: '本区专注美妆护肤、彩妆、香水和套装好价。色号、容量和库存以微信确认为准。',
+    description: '本区专注美妆护肤、彩妆、香水和套装好价。页面标注官网价，免税购买，色号和容量可加入清单后确认。',
     categories: ['全部', '护肤', '彩妆', '香水', '套装', '现货', '预订'],
     products: beautyProducts,
     pageClass: 'bg-[#fbfaf7]',
@@ -52,7 +52,7 @@ const siteConfigs = {
     sectionLabel: '电子产品',
     eyebrow: '电子数码专区',
     heroTitle: 'Apple / Dyson / Switch / 数码配件，本地好价先看这里',
-    description: '本区专注电子产品、数码配件和家用电器好价，商品主要通过美国本地渠道购入。贵重商品建议当面验货，价格和库存以微信确认为准。',
+    description: '本区专注电子产品、数码配件和家用电器好价，商品主要通过美国本地渠道购入。页面标注官网价，免税购买，贵重商品建议当面验货。',
     categories: ['全部', 'Apple', 'Dyson', 'Switch', '数码配件', '家用电器', '现货', '预订'],
     products: techProducts,
     pageClass: 'bg-[#f7f8fa]',
@@ -85,14 +85,14 @@ const serviceBenefits = [
   { title: '本地取货', description: 'WashU 附近线下自提', icon: PackageCheck },
   { title: '送货上门', description: 'WashU 附近可送货', icon: Truck },
   { title: '正品渠道', description: '美国本地渠道购入', icon: ShieldCheck },
-  { title: '微信确认', description: '价格库存当天确认', icon: WalletCards },
-  { title: '好价优先', description: '部分商品支持免税价', icon: BadgeDollarSign },
+  { title: '免税到手', description: '标多少按多少结算', icon: WalletCards },
+  { title: '官网价格', description: '按官网价整理购买', icon: BadgeDollarSign },
 ];
 const switch2Schema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: 'Nintendo Switch 2',
-  description: 'Nintendo Switch 2 本地好价询价，支持标准版和 Mario Kart World 同捆版，价格和库存请微信确认。',
+  description: 'Nintendo Switch 2 本地官网价免税购买，支持标准版和 Mario Kart World 同捆版。',
   brand: {
     '@type': 'Brand',
     name: 'Nintendo',
@@ -108,6 +108,17 @@ const switch2Schema = {
   },
 };
 
+const allProducts = [...beautyProducts, ...techProducts];
+
+const getCurrentProductPrice = (item) =>
+  allProducts.find((product) => product.id === item.id)?.price;
+
+const normalizeCartPrice = (item) => {
+  const currentPrice = getCurrentProductPrice(item);
+  if (!item.price || item.price.includes('微信询价')) return currentPrice || '官网价';
+  return item.price.replace(' / 微信确认', '').replace('预估 ', '免税价 ');
+};
+
 const getStoredCart = () => {
   try {
     const stored =
@@ -120,7 +131,7 @@ const getStoredCart = () => {
       ...item,
       section: item.section || (['美妆护肤', '香水', '彩妆', '套装'].includes(item.category) ? 'Beauty' : 'Tech'),
       sectionLabel: item.sectionLabel || (['美妆护肤', '香水', '彩妆', '套装'].includes(item.category) ? '美妆护肤' : '电子产品'),
-      price: item.price || '微信询价',
+      price: normalizeCartPrice(item),
     }));
   } catch {
     return [];
@@ -239,7 +250,7 @@ export default function App() {
   const displayedProductCount = displayProducts.length;
 
   useEffect(() => {
-    const description = 'Nintendo Switch 2 本地好价询价，支持标准版和 Mario Kart World 同捆版，价格和库存请微信确认。';
+    const description = 'Nintendo Switch 2 本地官网价免税购买，支持标准版和 Mario Kart World 同捆版。';
     const metaDescription = document.querySelector('meta[name="description"]');
     const existingSchema = document.getElementById('switch-2-product-schema');
 
@@ -247,7 +258,7 @@ export default function App() {
       document.title = detailProduct ? `${detailProduct.name}｜Duo Deals 美妆数码好价` : 'Duo Deals｜美妆数码好价';
       metaDescription?.setAttribute(
         'content',
-        detailProduct?.shortDescription || 'Duo Deals｜美妆数码好价，美国本地美妆护肤、香水、电子产品和数码配件挑选与微信询价。',
+        detailProduct?.shortDescription || 'Duo Deals｜美妆数码好价，美国本地美妆护肤、香水、电子产品和数码配件挑选，官网价免税购买。',
       );
       existingSchema?.remove();
       return;
@@ -279,7 +290,7 @@ export default function App() {
         if (items.length === 0) return '';
 
         const lines = items
-          .map((item, index) => `${index + 1}. ${item.brand} ${item.name}\n规格：${item.spec}\n数量：${item.quantity}`)
+          .map((item, index) => `${index + 1}. ${item.brand} ${item.name}\n规格：${item.spec}\n官网免税价：${item.price}\n数量：${item.quantity}`)
           .join('\n\n');
 
         return `${title}\n${lines}`;
@@ -287,14 +298,14 @@ export default function App() {
       .filter(Boolean)
       .join('\n\n');
 
-    return `你好，我想询价以下商品：\n\n${groupedText}\n\n取货方式：${pickupMethod}\n\n请问现在价格和库存是多少？`;
+    return `你好，我想购买以下商品，请帮我汇总购买和配送：\n\n${groupedText}\n\n取货方式：${pickupMethod}\n\n说明：网站标注的是官网价免税价，标多少按多少结算。\n\n我的微信：Lutissss`;
   }, [cartItems, pickupMethod]);
 
   const inquiryText =
     generatedInquiryText ||
     (cartItems.length === 0
-      ? '请先把想询价的商品加入清单，系统会在这里生成微信询价内容。'
-      : '点击“生成微信询价内容”后，这里会整理好可复制发送给微信的中文询价内容。');
+      ? '请先把想买的商品加入购买清单，系统会在这里生成微信购买信息。'
+      : '点击“生成购买信息”后，这里会整理好可复制发送给 Lutissss 的中文购买清单。');
 
   const addToCart = (product, openCart = false) => {
     setCartItems((items) => {
@@ -389,10 +400,10 @@ export default function App() {
                   <p className="text-sm font-black uppercase tracking-normal text-slate-500">Nintendo</p>
                   <h1 className="mt-3 text-4xl font-black leading-tight text-slate-950 md:text-6xl">Nintendo Switch 2</h1>
                   <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
-                    选择版本、配件和数量后加入询价清单。最终价格、库存和取货方式以微信确认为准。
+                    选择版本、配件和数量后加入购买清单。页面小计按官网价免税汇总，标多少按多少结算。
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {['全新现货 / 预订可询', '微信确认价格', 'WashU 附近线下自提或送货上门'].map((tag) => (
+                    {['全新现货 / 可预订', '官网价免税', 'WashU 附近线下自提或送货上门'].map((tag) => (
                       <span key={tag} className="rounded-full bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200">
                         {tag}
                       </span>
@@ -438,7 +449,7 @@ export default function App() {
                     {detailProduct.shortDescription}
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {['全新商品', '配置微信确认', 'WashU 附近线下自提或送货上门'].map((tag) => (
+                    {['全新商品', '官网价免税', 'WashU 附近线下自提或送货上门'].map((tag) => (
                       <span key={tag} className="rounded-full bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200">
                         {tag}
                       </span>

@@ -117,7 +117,7 @@ export default function Switch2Configurator({ product, onAddToCart, onBuyNow }) 
     ].join('-'),
     name: 'Nintendo Switch 2',
     spec,
-    price: `预估 ${formatUsd(subtotal)} / 微信确认`,
+    price: `免税价 ${formatUsd(subtotal)}`,
     quantity,
     selectedOptions: {
       版本: selectedEdition.name,
@@ -145,7 +145,7 @@ export default function Switch2Configurator({ product, onAddToCart, onBuyNow }) 
             <div className="mb-3 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-950 px-3 py-1 text-xs font-semibold text-white">
                 <Zap className="h-3.5 w-3.5" />
-                Switch 2 配置询价
+                Switch 2 配置购买
               </span>
               <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${inventoryClass[selectedEdition.inventory]}`}>
                 {inventoryLabel[selectedEdition.inventory]}
@@ -162,7 +162,7 @@ export default function Switch2Configurator({ product, onAddToCart, onBuyNow }) 
             <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">Nintendo</p>
             <h2 className="mt-1 text-3xl font-bold leading-tight text-slate-950">Nintendo Switch 2</h2>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              选择版本、配件和数量后加入询价清单。最终价格、库存和取货方式以微信确认为准。
+              选择版本、配件和数量后加入购买清单。页面小计按官网价免税汇总，标多少按多少结算。
             </p>
           </div>
 
@@ -284,9 +284,9 @@ export default function Switch2Configurator({ product, onAddToCart, onBuyNow }) 
                   <p className="mt-1 text-3xl font-bold">{formatUsd(subtotal)}</p>
                 </div>
                 <p className="text-right text-xs leading-5 text-slate-300">
-                  最终价格和库存
+                  官网价免税
                   <br />
-                  请微信确认
+                  标多少卖多少
                 </p>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-2">
@@ -305,7 +305,7 @@ export default function Switch2Configurator({ product, onAddToCart, onBuyNow }) 
                   onClick={() => onBuyNow(configuredProduct)}
                   className="h-11 rounded-xl bg-emerald-500 text-sm font-bold text-white disabled:bg-slate-600 disabled:text-slate-300"
                 >
-                  立即询价
+                  加入并打开清单
                 </button>
               </div>
             </div>

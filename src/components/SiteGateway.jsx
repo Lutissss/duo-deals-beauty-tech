@@ -2,7 +2,7 @@ import { ArrowRight, BadgeCheck, MapPin, PackageCheck, Sparkles, Smartphone } fr
 import beautyHomeImage from '../assets/beauty-home.png';
 import techHomeImage from '../assets/tech-home.png';
 
-const serviceNotes = ['WashU 附近线下自提或送货上门', '微信确认价格', '现货优先，也支持预订', '商品价格随活动和库存变化'];
+const serviceNotes = ['WashU 附近线下自提或送货上门', '官网价免税', '标多少按多少结算', '复制清单微信发送 Lutissss'];
 
 const entries = [
   {
@@ -38,7 +38,7 @@ export default function SiteGateway({ onNavigate }) {
             <h1 className="text-4xl font-black leading-tight text-slate-950 md:text-6xl">Duo Deals｜美妆数码好价</h1>
             <p className="mt-4 text-xl font-bold leading-8 text-slate-900">美国本地美妆护肤 & 电子数码好价精选</p>
             <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
-              美国本地好价选品站，美妆护肤和电子产品分区展示。支持 WashU 附近线下自提或送货上门，价格和库存请微信确认。
+              美国本地好价选品站，美妆护肤和电子产品分区展示。页面标注官网价，免税购买，标多少按多少结算。选好商品后复制清单微信发送 Lutissss，由我们汇总购买和配送。
             </p>
           </div>
         </div>

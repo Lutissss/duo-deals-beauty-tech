@@ -83,7 +83,7 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
             type="button"
             onClick={onOpenCart}
             className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-sm"
-            aria-label="询价清单"
+            aria-label="购买清单"
           >
             <ShoppingBag className="h-5 w-5" />
             {cartCount > 0 ? (
