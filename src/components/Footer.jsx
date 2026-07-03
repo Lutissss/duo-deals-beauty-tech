@@ -19,7 +19,7 @@ export default function Footer({ site }) {
           ))}
         </ul>
         <p className="mt-4 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-800 ring-1 ring-slate-200">
-          Duo Deals｜{site?.shortName || '美妆数码'}联系方式：请添加微信：Lutissss
+          Duo Deals｜{site?.shortName || '美妆数码百货'}联系方式：请添加微信：Lutissss
         </p>
       </div>
     </footer>

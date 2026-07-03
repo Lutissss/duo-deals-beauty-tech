@@ -44,8 +44,8 @@ export default function SiteGateway({ onNavigate }) {
               <BadgeCheck className="h-3.5 w-3.5" />
               美国本地华人 / 留学生好价选品
             </div>
-            <h1 className="text-4xl font-black leading-tight text-slate-950 md:text-6xl">Duo Deals｜美妆数码好价</h1>
-            <p className="mt-4 text-xl font-bold leading-8 text-slate-900">美国本地美妆护肤 & 电子数码好价精选</p>
+            <h1 className="text-4xl font-black leading-tight text-slate-950 md:text-6xl">Duo Deals｜美妆数码百货好价</h1>
+            <p className="mt-4 text-xl font-bold leading-8 text-slate-900">美国本地美妆护肤、电子数码 & 市场百货好价精选</p>
             <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
               美国本地好价选品站，美妆护肤、电子产品和市场百货分区展示。页面标注官网价或常见门店价，选好商品后复制清单微信发送 Lutissss，由我们汇总购买和配送。
             </p>

@@ -274,16 +274,16 @@ export default function App() {
     const existingSchema = document.getElementById('switch-2-product-schema');
 
     if (!isSwitch2Detail) {
-      document.title = detailProduct ? `${detailProduct.name}｜Duo Deals 美妆数码好价` : 'Duo Deals｜美妆数码好价';
+      document.title = detailProduct ? `${detailProduct.name}｜Duo Deals 美妆数码百货好价` : 'Duo Deals｜美妆数码百货好价';
       metaDescription?.setAttribute(
         'content',
-        detailProduct?.shortDescription || 'Duo Deals｜美妆数码好价，美国本地美妆护肤、香水、电子产品和数码配件挑选，官网价免税购买。',
+        detailProduct?.shortDescription || 'Duo Deals｜美妆数码百货好价，美国本地美妆护肤、香水、电子产品、数码配件和市场百货挑选，官网价或常见门店价免税购买。',
       );
       existingSchema?.remove();
       return;
     }
 
-    document.title = 'Nintendo Switch 2｜Duo Deals 美妆数码好价';
+    document.title = 'Nintendo Switch 2｜Duo Deals 美妆数码百货好价';
     metaDescription?.setAttribute('content', description);
 
     const schemaScript = existingSchema || document.createElement('script');
