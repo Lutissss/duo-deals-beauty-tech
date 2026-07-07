@@ -93,8 +93,8 @@ const getRouteFromLocation = () => {
 };
 
 const getBrowserPath = (path) => {
-  if (!BASE_PATH) return path;
-  return `${BASE_PATH}${path === '/' ? '/' : path}`;
+  const rootPath = `${BASE_PATH || ''}/`;
+  return path === '/' ? rootPath : `${rootPath}#${path}`;
 };
 
 const hasUploadedImage = (product) => !String(product.image).includes('placehold.co');
@@ -122,7 +122,7 @@ const switch2Schema = {
     lowPrice: '449.99',
     highPrice: '499.99',
     availability: 'https://schema.org/InStock',
-    url: 'https://lutissss.github.io/duo-deals-beauty-tech/electronics/switch-2',
+    url: 'https://lutissss.github.io/duo-deals-beauty-tech/#/electronics/switch-2',
   },
 };
 
@@ -168,6 +168,13 @@ export default function App() {
     () => normalizePickupMethod(localStorage.getItem(PICKUP_STORAGE_KEY) || localStorage.getItem(LEGACY_PICKUP_STORAGE_KEY) || PICKUP_METHOD),
   );
   const [cartItems, setCartItems] = useState(getStoredCart);
+
+  useEffect(() => {
+    const initialRoute = getRouteFromLocation();
+    if (!window.location.hash && initialRoute !== '/') {
+      window.history.replaceState({}, '', getBrowserPath(initialRoute));
+    }
+  }, []);
 
   const isSwitch2Detail = route === '/electronics/switch-2';
   const currentSite =
