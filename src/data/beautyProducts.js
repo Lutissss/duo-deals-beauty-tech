@@ -15,6 +15,10 @@ import narsPowderImage from '../assets/beauty-local-nars-powder.jpg';
 import rareHighlighterImage from '../assets/beauty-local-rare-highlighter.jpg';
 import saieHighlighterImage from '../assets/beauty-local-saie-highlighter.jpg';
 import yslLipGlossImage from '../assets/beauty-local-ysl-lip-gloss.jpg';
+import kosasMultistickImage from '../assets/beauty-kosas-multistick.jpg';
+import k18AirwashImage from '../assets/beauty-k18-airwash.jpg';
+import charlotteSettingSprayImage from '../assets/beauty-charlotte-setting-spray.png';
+import rhodeHighlightMilkImage from '../assets/beauty-rhode-highlight-milk.png';
 
 export const beautyProducts = [
   {
@@ -481,5 +485,69 @@ export const beautyProducts = [
     shortDescription: '适合自用或送礼，套装内容可加入清单后确认。',
     description: 'Clinique 护肤套装适合日常补水和送礼。',
     reminder: '预订套装需要先确认到货时间，商品以实际库存为准。',
+  },
+  {
+    id: 'beauty-kosas-impressionist-multistick',
+    section: 'Beauty',
+    sectionLabel: '美妆护肤',
+    name: 'Impressionist 唇颊两用棒',
+    brand: 'Kosas',
+    category: '彩妆',
+    status: '预订',
+    price: '官网 $34',
+    spec: '5.5g / 多色可选',
+    image: kosasMultistickImage,
+    badges: ['新品', '热门'],
+    shortDescription: '奶油质地唇颊两用棒，适合快速通勤妆和随身补妆。',
+    description: '可用于脸颊与唇部，显色度可叠加，适合自然红润妆感。',
+    reminder: '彩妆请先确认色号，页面标价为官网免税价。',
+  },
+  {
+    id: 'beauty-rhode-highlight-milk',
+    section: 'Beauty',
+    sectionLabel: '美妆护肤',
+    name: 'Highlight Milk 高光乳',
+    brand: 'rhode',
+    category: '彩妆',
+    status: '预订',
+    price: '官网 $28',
+    spec: '多色可选 / 轻透光泽',
+    image: rhodeHighlightMilkImage,
+    badges: ['新品', '热门'],
+    shortDescription: '可用于素颜或底妆后的轻透高光，适合自然光泽感妆效。',
+    description: '兼顾润泽感与提亮效果，可用于面部、锁骨和身体局部。',
+    reminder: '请先确认色号与库存，页面标价为官网免税价。',
+  },
+  {
+    id: 'beauty-charlotte-setting-spray',
+    section: 'Beauty',
+    sectionLabel: '美妆护肤',
+    name: 'Airbrush Flawless 定妆喷雾',
+    brand: 'Charlotte Tilbury',
+    category: '彩妆',
+    status: '预订',
+    price: '官网 $39',
+    spec: '100ml / 保湿定妆',
+    image: charlotteSettingSprayImage,
+    badges: ['热门'],
+    shortDescription: '轻薄保湿型定妆喷雾，适合通勤、聚会和长时间带妆。',
+    description: '可在妆前或妆后使用，帮助延长妆容并降低粉感。',
+    reminder: '喷雾类商品请确认包装和运输状态。',
+  },
+  {
+    id: 'beauty-k18-airwash',
+    section: 'Beauty',
+    sectionLabel: '美妆护肤',
+    name: 'AirWash 免洗干发喷雾',
+    brand: 'K18',
+    category: '美发护理',
+    status: '预订',
+    price: '官网 $48',
+    spec: '118ml / 非气雾型',
+    image: k18AirwashImage,
+    badges: ['热门'],
+    shortDescription: '适合上课、健身和旅行时快速清爽发根，不易留下白屑。',
+    description: '非气雾型干发喷雾，适合在洗发间隔期处理发根油腻和异味。',
+    reminder: '美发产品请按自身发质选择，喷雾类请确认运输要求。',
   },
 ];

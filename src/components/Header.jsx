@@ -11,11 +11,11 @@ export default function Header({ site, onNavigate }) {
     : isMarket
       ? 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85'
       : techHomeImage;
-  const heroLabel = isBeauty ? '美妆护肤' : isMarket ? '市场百货' : '电子产品';
+  const heroLabel = isBeauty ? '美妆护肤' : isMarket ? '日用百货' : '电子产品';
   const heroSubtitle = isBeauty
     ? '护肤、彩妆、香水、套装，本地好价精选。'
     : isMarket
-      ? '饮料、零食、纸巾和厨房日用品，WashU 附近顺手补货。'
+      ? '饮料、零食、个人护理和家庭清洁，WashU 附近顺手补货。'
       : 'Apple、Dyson、Switch 和日常数码配件。';
 
   return (

@@ -6,6 +6,7 @@ import Header from './components/Header.jsx';
 import InquiryCart from './components/InquiryCart.jsx';
 import ProductCard from './components/ProductCard.jsx';
 import ProductConfigurator from './components/ProductConfigurator.jsx';
+import ProductImage from './components/ProductImage.jsx';
 import SiteGateway from './components/SiteGateway.jsx';
 import Switch2Configurator from './components/Switch2Configurator.jsx';
 import TopNav from './components/TopNav.jsx';
@@ -42,7 +43,7 @@ const siteConfigs = {
     eyebrow: '美妆护肤专区',
     heroTitle: '护肤 / 彩妆 / 香水 / 套装，美国本地好价精选',
     description: '本区专注美妆护肤、彩妆、香水和套装好价。页面标注官网价，免税购买，色号和容量可加入清单后确认。',
-    categories: ['全部', '护肤', '彩妆', '香水', '套装', '现货', '预订'],
+    categories: ['全部', '护肤', '彩妆', '香水', '美发护理', '套装', '现货', '预订'],
     products: beautyProducts,
     pageClass: 'bg-[#fbfaf7]',
   },
@@ -63,14 +64,14 @@ const siteConfigs = {
   market: {
     key: 'market',
     path: '/market',
-    name: '市场百货专区',
-    shortName: '市场百货',
+    name: '日用百货专区',
+    shortName: '日用百货',
     section: 'Market',
-    sectionLabel: '市场百货',
-    eyebrow: '市场百货专区',
-    heroTitle: '饮料 / 零食 / 纸巾 / 厨房日用品，本地顺手补货',
-    description: '本区参考本地配送平台的便利店和 grocery 选品逻辑，提供饮料、零食、方便速食、纸品和厨房清洁用品。页面标注常见门店价，最终以当天采购清单确认为准。',
-    categories: ['全部', '饮料', '零食', '方便速食', '日用纸品', '厨房清洁', '现货', '预订'],
+    sectionLabel: '日用百货',
+    eyebrow: '日用百货专区',
+    heroTitle: '饮料 / 零食 / 个护 / 清洁 / 纸品，本地顺手补货',
+    description: '本区提供饮料、零食、方便速食、个人护理、纸品和清洁用品。页面标注美国常见门店价，最终以当天采购清单确认为准。',
+    categories: ['全部', '饮料', '零食', '方便速食', '个人护理', '日用纸品', '洗衣清洁', '厨房清洁', '现货', '预订'],
     products: marketProducts,
     pageClass: 'bg-[#fafbf7]',
   },
@@ -263,6 +264,8 @@ export default function App() {
         return matchesCategory && matchesBrand && matchesSearch;
       })
       .sort((a, b) => {
+        const priorityRank = (b.product.priority || 0) - (a.product.priority || 0);
+        if (priorityRank) return priorityRank;
         const imageRank = Number(hasUploadedImage(b.product)) - Number(hasUploadedImage(a.product));
         return imageRank || a.originalIndex - b.originalIndex;
       })
@@ -284,7 +287,7 @@ export default function App() {
       document.title = detailProduct ? `${detailProduct.name}｜Duo Deals 美妆数码百货好价` : 'Duo Deals｜美妆数码百货好价';
       metaDescription?.setAttribute(
         'content',
-        detailProduct?.shortDescription || 'Duo Deals｜美妆数码百货好价，美国本地美妆护肤、香水、电子产品、数码配件和市场百货挑选，官网价或常见门店价免税购买。',
+        detailProduct?.shortDescription || 'Duo Deals｜美妆数码百货好价，美国本地美妆护肤、香水、电子产品、数码配件和日用百货挑选，官网价或常见门店价免税购买。',
       );
       existingSchema?.remove();
       return;
@@ -308,7 +311,7 @@ export default function App() {
     const sections = [
       { section: 'Beauty', title: '【美妆护肤】' },
       { section: 'Tech', title: '【电子产品】' },
-      { section: 'Market', title: '【市场百货】' },
+      { section: 'Market', title: '【日用百货】' },
     ];
 
     const groupedText = sections
@@ -438,10 +441,10 @@ export default function App() {
                   </div>
                 </div>
                 <div className="bg-gradient-to-br from-white to-slate-100 p-6 md:p-10">
-                  <img
-                    src={switch2Product.image}
-                    alt="Nintendo Switch 2"
+                  <ProductImage
+                    product={switch2Product}
                     className="mx-auto aspect-[1.2/1] w-full max-w-xl object-contain"
+                    loading="eager"
                   />
                 </div>
               </div>
@@ -484,10 +487,10 @@ export default function App() {
                   </div>
                 </div>
                 <div className="bg-gradient-to-br from-white to-slate-100 p-6 md:p-10">
-                  <img
-                    src={detailProduct.image}
-                    alt={detailProduct.name}
+                  <ProductImage
+                    product={detailProduct}
                     className="mx-auto aspect-[1.2/1] w-full max-w-xl object-contain"
+                    loading="eager"
                   />
                 </div>
               </div>

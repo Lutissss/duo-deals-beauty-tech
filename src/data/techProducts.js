@@ -2,11 +2,69 @@ import ipadProSampleImage from '../assets/ipad-pro-sample.jpg';
 import appleCareImage from '../assets/applecare-plus.svg';
 import switchMarioImage from '../assets/tech-switch-mario.svg';
 import switch2SampleImage from '../assets/switch-2-sample.jpg';
+import airtag4PackImage from '../assets/tech-airtag-4pack.jpg';
+import metaQuest3sImage from '../assets/tech-meta-quest-3s.jpg';
+import fireTv4kImage from '../assets/tech-fire-tv-4k.jpg';
 
 const appleStoreImage = (code) =>
   `https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/${code}?wid=900&hei=900&fmt=jpeg&qlt=90`;
 
 export const techProducts = [
+  {
+    id: 'tech-airtag-4-pack',
+    section: 'Tech',
+    sectionLabel: '电子产品',
+    name: 'AirTag 四件装',
+    brand: 'Apple',
+    category: 'Apple',
+    status: '预订',
+    price: '官网 $99',
+    spec: '4 件装 / 第二代',
+    image: airtag4PackImage,
+    priority: 100,
+    badges: ['热门', '留学必备'],
+    shortDescription: '适合行李箱、钥匙和书包定位，留学生出行与搬家常用。',
+    description: '通过“查找”App 定位个人物品，四件装适合多人拼单或一次覆盖多个物品。',
+    reminder: '定位器不替代贵重物品保管，请按实际需求选择数量。',
+  },
+  {
+    id: 'tech-meta-quest-3s',
+    section: 'Tech',
+    sectionLabel: '电子产品',
+    name: 'Meta Quest 3S',
+    brand: 'Meta',
+    category: '数码配件',
+    status: '预订',
+    price: '官网起 $349.99',
+    spec: '128GB / 256GB 可选',
+    image: metaQuest3sImage,
+    priority: 90,
+    badges: ['热门'],
+    optionGroups: [
+      { name: '容量', values: ['128GB', '256GB'] },
+      { name: '颜色', values: ['白色'] },
+    ],
+    shortDescription: '入门混合现实头显，适合游戏、健身和沉浸式娱乐。',
+    description: '无线一体式头显，适合体验 VR 游戏、健身应用和混合现实内容。',
+    reminder: '头显类商品建议确认容量、包装与账号地区设置。',
+  },
+  {
+    id: 'tech-fire-tv-stick-4k',
+    section: 'Tech',
+    sectionLabel: '电子产品',
+    name: 'Fire TV Stick 4K Select',
+    brand: 'Amazon',
+    category: '家用电器',
+    status: '预订',
+    price: '官网 $39.99',
+    spec: '4K 流媒体电视棒 / 含遥控器',
+    image: fireTv4kImage,
+    priority: 80,
+    badges: ['宿舍热门'],
+    shortDescription: '把普通电视升级为流媒体电视，适合宿舍、公寓和出租房。',
+    description: '通过 HDMI 连接电视，可用于主流流媒体应用与语音遥控。',
+    reminder: '使用前请确认电视有可用 HDMI 接口和稳定 Wi-Fi。',
+  },
   {
     id: 'tech-iphone-17-pro',
     section: 'Tech',
@@ -23,7 +81,6 @@ export const techProducts = [
       { name: '机型', values: ['iPhone 17 Pro', 'iPhone 17 Pro Max'] },
       { name: '容量', values: ['256GB', '512GB', '1TB', '2TB'] },
       { name: '颜色', values: ['银色', '深色', '橙色', '其他颜色可选'] },
-      { name: '版本', values: ['无锁版', '运营商版本需确认'] },
     ],
     shortDescription: 'iPhone 17 Pro 系列，机型、容量、颜色可选，按官网价免税购买。',
     description: '适合想要最新 Pro 系列影像、性能和高刷新率体验的用户。可按机型、容量、颜色组合加入购买清单。',
@@ -44,11 +101,10 @@ export const techProducts = [
     optionGroups: [
       { name: '容量', values: ['256GB', '512GB', '1TB'] },
       { name: '颜色', values: ['浅色', '深色', '其他颜色可选'] },
-      { name: '版本', values: ['无锁版', '运营商版本需确认'] },
     ],
     shortDescription: 'iPhone Air 轻薄款，颜色和容量可选，按官网价免税购买。',
     description: '适合想要轻薄机身、日常使用和苹果生态体验的用户。',
-    reminder: '手机类请确认无锁版本、颜色、容量和预计取货 / 配送时间。',
+    reminder: '手机类请确认颜色、容量和预计取货 / 配送时间。',
   },
   {
     id: 'tech-iphone-17',
@@ -65,7 +121,6 @@ export const techProducts = [
     optionGroups: [
       { name: '容量', values: ['256GB', '512GB'] },
       { name: '颜色', values: ['黑色', '白色', '蓝色', '粉色', '其他颜色可选'] },
-      { name: '版本', values: ['无锁版', '运营商版本需确认'] },
     ],
     shortDescription: 'iPhone 17 标准款，适合日常主力机，按官网价免税购买。',
     description: '适合日常使用、拍照、学习和社交，配置更均衡。',
@@ -86,11 +141,10 @@ export const techProducts = [
     optionGroups: [
       { name: '容量', values: ['128GB', '256GB', '512GB'] },
       { name: '颜色', values: ['黑色', '白色', '其他颜色可选'] },
-      { name: '版本', values: ['无锁版', '运营商版本需确认'] },
     ],
     shortDescription: 'iPhone 17e 入门新款，适合预算更稳的用户。',
     description: '适合日常通讯、拍照、学习和轻度娱乐，具体配置可加入购买清单。',
-    reminder: '手机类请确认无锁状态、容量和到货时间。',
+    reminder: '手机类请确认颜色、容量和到货时间。',
   },
   {
     id: 'tech-ipad-air',
@@ -553,6 +607,8 @@ export const techProducts = [
     price: '官网起 $449.99',
     spec: 'Switch 2 / 套装可选',
     image: switch2SampleImage,
+    priority: 120,
+    badges: ['新品', '热门'],
     detailPath: '/electronics/switch-2',
     shortDescription: 'Switch 2 主机样图，标准版和同捆版可选，按官网价免税购买。',
     description: 'Nintendo Switch 2 主机可按版本、配件和数量加入购买清单。',
@@ -569,6 +625,8 @@ export const techProducts = [
     price: '官网起 $1,199',
     spec: 'iPad Pro / 尺寸和内存可选',
     image: ipadProSampleImage,
+    priority: 110,
+    badges: ['热门'],
     detailPath: '/electronics/ipad-pro',
     optionGroups: [
       { name: '尺寸', values: ['11 英寸', '13 英寸'] },

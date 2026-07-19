@@ -1,13 +1,21 @@
 import { useMemo, useState } from 'react';
 import { Minus, Plus, ShoppingBag, ShieldCheck } from 'lucide-react';
+import ProductImage from './ProductImage.jsx';
 
 export default function ProductConfigurator({ product, onAddToCart, onBuyNow }) {
+  const optionGroups = useMemo(
+    () =>
+      (product.optionGroups || []).filter((group) =>
+        ['容量', '内存', '硬盘', '颜色'].some((label) => group.name.includes(label)),
+      ),
+    [product.optionGroups],
+  );
   const defaultOptions = useMemo(
     () =>
       Object.fromEntries(
-        (product.optionGroups || []).map((group) => [group.name, group.values[0]]),
+        optionGroups.map((group) => [group.name, group.values[0]]),
       ),
-    [product.optionGroups],
+    [optionGroups],
   );
   const [selectedOptions, setSelectedOptions] = useState(defaultOptions);
   const [quantity, setQuantity] = useState(1);
@@ -25,7 +33,7 @@ export default function ProductConfigurator({ product, onAddToCart, onBuyNow }) 
     <section className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
       <div className="grid gap-6 p-4 md:grid-cols-[1fr_0.9fr] md:p-6">
         <div className="rounded-[24px] bg-gradient-to-br from-white to-slate-50 p-5 ring-1 ring-slate-100">
-          <img src={product.image} alt={product.name} className="mx-auto aspect-square w-full max-w-lg object-contain" />
+          <ProductImage product={product} className="mx-auto aspect-square w-full max-w-lg object-contain" loading="eager" />
         </div>
 
         <aside className="md:sticky md:top-24 md:self-start">
@@ -37,7 +45,7 @@ export default function ProductConfigurator({ product, onAddToCart, onBuyNow }) 
             </div>
 
             <div className="space-y-4">
-              {(product.optionGroups || []).map((group, index) => (
+              {optionGroups.map((group, index) => (
                 <div key={group.name}>
                   <p className="text-sm font-black text-slate-950">
                     {index + 1}. {group.name}

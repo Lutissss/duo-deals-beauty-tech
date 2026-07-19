@@ -2,12 +2,84 @@ import charminImage from '../assets/market-charmin.svg';
 import laysImage from '../assets/market-lays.svg';
 import shinRamyunImage from '../assets/market-shin-ramyun.svg';
 import ziplocImage from '../assets/market-ziploc.svg';
+import tidePodsImage from '../assets/market-tide-pods.png';
+import cloroxWipesImage from '../assets/market-clorox-wipes.png';
+import ceraveCleanserImage from '../assets/market-cerave-cleanser.png';
+import doveBodyWashImage from '../assets/market-dove-body-wash.jpg';
 
 export const marketProducts = [
   {
+    id: 'market-tide-pods-original',
+    section: 'Market',
+    sectionLabel: '日用百货',
+    name: 'Tide PODS 洗衣凝珠',
+    brand: 'Tide',
+    category: '洗衣清洁',
+    status: '预订',
+    price: '门店价约 $12.97',
+    spec: 'Original / 42 颗',
+    image: tidePodsImage,
+    priority: 100,
+    badges: ['热销', '宿舍必备'],
+    shortDescription: '洗衣房使用方便，独立定量，适合宿舍和公寓日常囤货。',
+    description: '常见洗衣凝珠，免量取、携带方便，适合开学和搬家时一起采购。',
+    reminder: '请密封保存并远离儿童，价格以当天采购门店为准。',
+  },
+  {
+    id: 'market-clorox-wipes',
+    section: 'Market',
+    sectionLabel: '日用百货',
+    name: 'Clorox 消毒清洁湿巾',
+    brand: 'Clorox',
+    category: '厨房清洁',
+    status: '预订',
+    price: '门店价约 $5.82',
+    spec: 'Fresh Scent / 75 片',
+    image: cloroxWipesImage,
+    priority: 95,
+    badges: ['热销'],
+    shortDescription: '适合清洁桌面、厨房台面、浴室和高频接触区域。',
+    description: '宿舍与公寓常备清洁湿巾，开盖即用，适合日常快速清洁。',
+    reminder: '请按包装说明使用，不可用于皮肤或餐具直接清洁。',
+  },
+  {
+    id: 'market-cerave-hydrating-cleanser',
+    section: 'Market',
+    sectionLabel: '日用百货',
+    name: 'CeraVe 保湿洁面乳',
+    brand: 'CeraVe',
+    category: '个人护理',
+    status: '预订',
+    price: '门店价约 $16.99',
+    spec: '12oz / 中性至干性肌肤',
+    image: ceraveCleanserImage,
+    priority: 90,
+    badges: ['热销', '日常护理'],
+    shortDescription: '美国常见基础洁面，适合干皮和敏感肌日常温和清洁。',
+    description: '无香型保湿洁面，可作为日常面部清洁，也适合开学囤货。',
+    reminder: '个人护理产品请根据自身肤质选择，开封后非质量问题不退换。',
+  },
+  {
+    id: 'market-dove-deep-moisture-body-wash',
+    section: 'Market',
+    sectionLabel: '日用百货',
+    name: 'Dove 深层保湿沐浴露',
+    brand: 'Dove',
+    category: '个人护理',
+    status: '预订',
+    price: '门店价约 $10.99',
+    spec: '30.6oz / 泵装',
+    image: doveBodyWashImage,
+    priority: 85,
+    badges: ['热销'],
+    shortDescription: '大容量日常沐浴露，适合宿舍、公寓和家庭使用。',
+    description: '保湿型沐浴露，容量大、使用方便，适合干燥季节日常洗护。',
+    reminder: '香味和包装可能随门店库存变化，以当天采购为准。',
+  },
+  {
     id: 'market-master-kong-ice-tea',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: '康师傅冰红茶',
     brand: 'Master Kong',
     category: '饮料',
@@ -22,7 +94,7 @@ export const marketProducts = [
   {
     id: 'market-mizone',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: '脉动维生素饮料',
     brand: 'Mizone',
     category: '饮料',
@@ -37,7 +109,7 @@ export const marketProducts = [
   {
     id: 'market-kirkland-water',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: 'Kirkland 矿泉水整箱',
     brand: 'Kirkland',
     category: '饮料',
@@ -52,7 +124,7 @@ export const marketProducts = [
   {
     id: 'market-gatorade-variety-pack',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: 'Gatorade 运动饮料组合',
     brand: 'Gatorade',
     category: '饮料',
@@ -67,7 +139,7 @@ export const marketProducts = [
   {
     id: 'market-red-bull',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: 'Red Bull 能量饮料',
     brand: 'Red Bull',
     category: '饮料',
@@ -82,7 +154,7 @@ export const marketProducts = [
   {
     id: 'market-lays-classic',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: "Lay's 经典原味薯片",
     brand: "Lay's",
     category: '零食',
@@ -97,7 +169,7 @@ export const marketProducts = [
   {
     id: 'market-oreo-family',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: 'OREO 奥利奥家庭装',
     brand: 'OREO',
     category: '零食',
@@ -112,7 +184,7 @@ export const marketProducts = [
   {
     id: 'market-shin-ramyun-cup',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: '辛拉面杯面',
     brand: 'Nongshim',
     category: '方便速食',
@@ -127,7 +199,7 @@ export const marketProducts = [
   {
     id: 'market-bounty-paper-towel',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: 'Bounty 厨房纸巾',
     brand: 'Bounty',
     category: '日用纸品',
@@ -142,7 +214,7 @@ export const marketProducts = [
   {
     id: 'market-charmin-toilet-paper',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: 'Charmin 卫生纸',
     brand: 'Charmin',
     category: '日用纸品',
@@ -157,7 +229,7 @@ export const marketProducts = [
   {
     id: 'market-dawn-dish-soap',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: 'Dawn 洗洁精',
     brand: 'Dawn',
     category: '厨房清洁',
@@ -172,7 +244,7 @@ export const marketProducts = [
   {
     id: 'market-ziploc-freezer-bags',
     section: 'Market',
-    sectionLabel: '市场百货',
+    sectionLabel: '日用百货',
     name: 'Ziploc 保鲜袋',
     brand: 'Ziploc',
     category: '厨房清洁',

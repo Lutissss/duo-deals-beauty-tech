@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ArrowRight, ShoppingBag } from 'lucide-react';
+import ProductImage from './ProductImage.jsx';
 
 export default function ProductCard({ product, onAddToCart, onInquiry, onViewDetails }) {
   const defaultOptions = useMemo(
@@ -22,46 +23,51 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
     spec: optionSpec ? `${product.spec} / ${optionSpec}` : product.spec,
   };
 
-  const isUploadedImage = !String(product.image).includes('placehold.co');
-  const numericPrice = product.price?.startsWith('$') ? product.price : null;
   const hasDetailPage = Boolean(product.detailPath && onViewDetails);
   const displaySpec = hasDetailPage ? product.spec : selectedProduct.spec;
+  const badges = product.badges || (product.priority ? ['热门'] : []);
+  const imageTone =
+    product.section === 'Beauty'
+      ? 'from-[#fff8f8] to-[#f8efec]'
+      : product.section === 'Market'
+        ? 'from-[#f8fbf3] to-[#edf5e8]'
+        : 'from-white to-[#eef3f7]';
   const imageContent = (
     <>
-      <img
-        src={product.image}
-        alt={product.name}
-        className={`aspect-square w-full rounded-xl object-contain ${isUploadedImage ? 'mix-blend-normal' : ''}`}
-        loading="lazy"
+      <ProductImage
+        product={product}
+        className="aspect-square w-full rounded-md object-contain"
       />
-      <div className="absolute left-3 top-3 flex gap-1">
-        {isUploadedImage ? (
-          <span className="rounded-md bg-slate-950 px-2 py-1 text-[10px] font-black uppercase text-white">New</span>
-        ) : null}
-        {product.status === '现货' ? (
-          <span className="rounded-md bg-red-600 px-2 py-1 text-[10px] font-black uppercase text-white">Hot</span>
-        ) : null}
+      <div className="absolute left-2 top-2 flex gap-1">
+        {badges.slice(0, 2).map((badge, index) => (
+          <span
+            key={badge}
+            className={`rounded-md px-2 py-1 text-[10px] font-black text-white shadow-sm ${index === 0 ? 'bg-slate-950' : 'bg-rose-600'}`}
+          >
+            {badge}
+          </span>
+        ))}
       </div>
     </>
   );
 
   return (
-    <article className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-200/60 transition hover:-translate-y-0.5 hover:shadow-md">
+    <article className="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-slate-200/90 bg-white shadow-sm shadow-slate-200/60 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md">
       {hasDetailPage ? (
         <button
           type="button"
           onClick={() => onViewDetails(product.detailPath)}
-          className="relative block w-full cursor-pointer bg-gradient-to-br from-white to-slate-50 p-3 text-left"
+          className={`relative block w-full cursor-pointer bg-gradient-to-br p-2 text-left ${imageTone}`}
         >
           {imageContent}
         </button>
       ) : (
-        <div className="relative bg-gradient-to-br from-white to-slate-50 p-3">{imageContent}</div>
+        <div className={`relative bg-gradient-to-br p-2 ${imageTone}`}>{imageContent}</div>
       )}
 
-      <div className="space-y-2 p-3">
+      <div className="flex flex-1 flex-col space-y-2 p-3">
         <div className="flex items-center justify-between gap-1">
-          <span className="truncate rounded-md bg-slate-100 px-2 py-1 text-[10px] font-bold text-slate-600">{product.brand}</span>
+          <span className="truncate rounded-md bg-slate-100 px-2 py-1 text-[10px] font-black text-slate-600">{product.brand}</span>
           <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ring-1 ${statusClass}`}>{product.status}</span>
         </div>
 
@@ -112,15 +118,15 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
           </div>
         ) : null}
 
-        <div className="flex items-end justify-between gap-2 pt-1">
+        <div className="mt-auto flex items-end justify-between gap-2 pt-1">
           <div>
-            <p className="text-[10px] font-bold uppercase text-slate-400">{product.category}</p>
-            <strong className="text-base font-black text-slate-950">{numericPrice || product.price}</strong>
+            <p className="text-[10px] font-bold text-slate-400">{product.category}</p>
+            <strong className="line-clamp-1 text-sm font-black text-slate-950 sm:text-base">{product.price}</strong>
           </div>
           <button
             type="button"
             onClick={() => (hasDetailPage ? onViewDetails(product.detailPath) : onAddToCart(selectedProduct))}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-950 shadow-sm transition active:scale-95"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-950 shadow-sm transition active:scale-95"
             aria-label={hasDetailPage ? '查看配置' : '加入购买清单'}
           >
             <ShoppingBag className="h-4 w-4" />
@@ -131,7 +137,7 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
           <button
             type="button"
             onClick={() => (hasDetailPage ? onViewDetails(product.detailPath) : onInquiry(selectedProduct))}
-            className="inline-flex h-9 items-center justify-center gap-1 rounded-xl bg-slate-950 text-xs font-bold text-white shadow-sm active:bg-slate-800"
+            className="inline-flex h-9 items-center justify-center gap-1 rounded-lg bg-slate-950 px-2 text-xs font-bold text-white shadow-sm active:bg-slate-800"
           >
             {hasDetailPage ? <ArrowRight className="h-3.5 w-3.5" /> : <ShoppingBag className="h-3.5 w-3.5" />}
             {hasDetailPage ? '查看配置' : '加入购买清单'}

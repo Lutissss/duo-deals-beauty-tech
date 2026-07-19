@@ -18,6 +18,7 @@ const categoryIcons = {
   彩妆: Brush,
   香水: SprayCan,
   套装: Package,
+  美发护理: Sparkles,
   现货: PackageCheck,
   预订: Flower2,
   Apple,
@@ -25,6 +26,13 @@ const categoryIcons = {
   Switch: Headphones,
   数码配件: Headphones,
   家用电器: Home,
+  个人护理: Sparkles,
+  洗衣清洁: Home,
+  饮料: SprayCan,
+  零食: Package,
+  方便速食: Package,
+  日用纸品: PackageCheck,
+  厨房清洁: Home,
 };
 
 export default function CategoryTabs({ categories, activeCategory, onChange }) {

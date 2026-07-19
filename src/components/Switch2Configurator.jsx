@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Minus, Plus, ShieldCheck, ShoppingBag, Zap } from 'lucide-react';
+import ProductImage from './ProductImage.jsx';
 
 const editionOptions = [
   {
@@ -151,10 +152,10 @@ export default function Switch2Configurator({ product, onAddToCart, onBuyNow }) 
                 {inventoryLabel[selectedEdition.inventory]}
               </span>
             </div>
-            <img
-              src={product.image}
-              alt="Nintendo Switch 2"
+            <ProductImage
+              product={product}
               className="aspect-[1.5/1] w-full rounded-2xl bg-white object-contain"
+              loading="eager"
             />
           </div>
 

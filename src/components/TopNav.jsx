@@ -1,10 +1,10 @@
-import { Home, MonitorSmartphone, Search, ShoppingBag, ShoppingBasket, Sparkles, UserRound, X } from 'lucide-react';
+import { Home, MonitorSmartphone, Search, ShoppingBag, ShoppingBasket, Sparkles, X } from 'lucide-react';
 
 const navItems = [
   { label: '首页', path: '/', icon: Home },
   { label: '美妆专区', path: '/beauty', icon: Sparkles },
   { label: '电子产品专区', path: '/electronics', icon: MonitorSmartphone },
-  { label: '市场百货', path: '/market', icon: ShoppingBasket },
+  { label: '日用百货', path: '/market', icon: ShoppingBasket },
 ];
 
 export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searchTerm = '', onSearchChange }) {
@@ -17,9 +17,9 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
           <button
             type="button"
             onClick={() => onNavigate('/')}
-            className="inline-flex h-12 shrink-0 items-center gap-2 rounded-2xl bg-white px-1 text-slate-950"
+            className="inline-flex h-12 shrink-0 items-center gap-2 rounded-lg bg-white px-1 text-slate-950"
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white shadow-sm">
               <ShoppingBag className="h-5 w-5" />
             </span>
             <span className="max-w-[140px] truncate text-lg font-black tracking-tight text-slate-950 sm:max-w-none sm:text-xl">
@@ -47,7 +47,7 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
           </div>
 
           {showSearch ? (
-            <label className="ml-auto hidden h-12 min-w-0 max-w-md flex-1 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 shadow-inner shadow-slate-200/40 focus-within:border-slate-400 md:flex">
+            <label className="ml-auto hidden h-12 min-w-0 max-w-md flex-1 items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-4 shadow-inner shadow-slate-200/40 focus-within:border-slate-400 md:flex">
               <Search className="h-5 w-5 shrink-0 text-slate-500" />
               <input
                 value={searchTerm}
@@ -74,16 +74,8 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
 
           <button
             type="button"
-            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-sm md:flex"
-            aria-label="账号"
-          >
-            <UserRound className="h-5 w-5" />
-          </button>
-
-          <button
-            type="button"
             onClick={onOpenCart}
-            className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-sm"
+            className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-900 shadow-sm"
             aria-label="购买清单"
           >
             <ShoppingBag className="h-5 w-5" />
@@ -116,7 +108,7 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
         </div>
 
         {showSearch ? (
-          <label className="mt-2 flex h-11 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 focus-within:border-slate-400 md:hidden">
+          <label className="mt-2 flex h-11 items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 focus-within:border-slate-400 md:hidden">
             <Search className="h-4 w-4 shrink-0 text-slate-500" />
             <input
               value={searchTerm}
