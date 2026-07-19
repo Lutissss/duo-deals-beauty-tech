@@ -2,6 +2,33 @@ import { useMemo, useState } from 'react';
 import { Minus, Plus, ShoppingBag, ShieldCheck } from 'lucide-react';
 import ProductImage from './ProductImage.jsx';
 
+const colorSwatches = {
+  '白色': '#f8fafc',
+  '黑色': '#17191f',
+  '亮黑色': '#111827',
+  '银色': '#d9dee5',
+  '深色': '#353942',
+  '浅色': '#e8e3da',
+  '蓝色': '#89a9c7',
+  '粉色': '#e9bdc8',
+  '紫色': '#ad9bc5',
+  '绿色': '#8eaa91',
+  '黄色': '#e5ca70',
+  '橙色': '#d86c3b',
+  '星光色': '#e6dcc7',
+  '深空灰': '#575a60',
+  '午夜色': '#202936',
+  '太空黑色': '#34363b',
+  '玫瑰金色': '#d5a49a',
+  '自然钛金属': '#aaa093',
+  '金色钛金属': '#c5ad84',
+  '板岩色钛金属': '#626666',
+  '黑色钛金属': '#333538',
+};
+
+const getColorSwatch = (value) =>
+  colorSwatches[value] || Object.entries(colorSwatches).find(([name]) => value.includes(name))?.[1];
+
 export default function ProductConfigurator({ product, onAddToCart, onBuyNow }) {
   const optionGroups = useMemo(
     () =>
@@ -53,6 +80,7 @@ export default function ProductConfigurator({ product, onAddToCart, onBuyNow }) 
                   <div className="mt-2 grid grid-cols-2 gap-2">
                     {group.values.map((value) => {
                       const isActive = selectedOptions[group.name] === value;
+                      const swatch = group.name.includes('颜色') ? getColorSwatch(value) : null;
 
                       return (
                         <button
@@ -65,7 +93,16 @@ export default function ProductConfigurator({ product, onAddToCart, onBuyNow }) 
                               : 'border-slate-200 bg-white text-slate-800 hover:border-slate-400'
                           }`}
                         >
-                          {value}
+                          <span className="flex items-center gap-2">
+                            {swatch ? (
+                              <span
+                                className={`h-4 w-4 shrink-0 rounded-full border ${isActive ? 'border-white/70' : 'border-slate-300'}`}
+                                style={{ backgroundColor: swatch }}
+                                aria-hidden="true"
+                              />
+                            ) : null}
+                            <span>{value}</span>
+                          </span>
                         </button>
                       );
                     })}
