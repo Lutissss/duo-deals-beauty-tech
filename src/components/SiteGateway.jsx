@@ -33,7 +33,7 @@ const entries = [
   {
     title: 'Daily Essentials',
     chineseTitle: '日用百货专区',
-    description: '饮料、零食、个护、纸品和家庭清洁，日常顺手补货',
+    description: '整箱饮用水、饮料、零食、个护、纸品和家庭清洁，日常顺手补货',
     buttonText: '进入日用百货',
     path: '/market',
     icon: ShoppingBasket,
