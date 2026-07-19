@@ -2,7 +2,12 @@ import { ArrowRight, BadgeCheck, MapPin, PackageCheck, ShoppingBasket, Sparkles,
 import beautyHomeImage from '../assets/beauty-home.png';
 import techHomeImage from '../assets/tech-home.png';
 
-const serviceNotes = ['WashU 附近线下自提或送货上门', '官网价免税', '标多少按多少结算', '复制清单微信发送 Lutissss'];
+const serviceNotes = [
+  '页面标价就是免税到手价',
+  '日用百货送货上门满 $60 起送',
+  'WashU 附近线下自提不限金额',
+  '复制清单微信发送 Lutissss',
+];
 
 const entries = [
   {
@@ -52,10 +57,10 @@ export default function SiteGateway({ onNavigate }) {
                 <h1 className="text-4xl font-black leading-tight text-slate-950 md:text-6xl">Duo Deals｜美妆数码百货好价</h1>
                 <p className="mt-4 text-xl font-bold leading-8 text-slate-900">美国本地美妆护肤、电子数码 & 日用百货好价精选</p>
                 <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
-                  美国本地好价选品站，美妆护肤、电子产品和日用百货分区展示。页面标注官网价或常见门店价，选好商品后复制清单微信发送 Lutissss，由我们汇总购买和配送。
+                  美国本地好价选品站，美妆护肤、电子产品和日用百货分区展示。页面标价就是免税到手价，不再额外加税；选好商品后复制清单微信发送 Lutissss，由我们汇总购买和配送。
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  {['美国本地渠道', '官网价免税', 'WashU 附近取送'].map((item) => (
+                  {['页面标价即免税到手价', '日用百货送货满 $60', 'WashU 附近自提不限金额'].map((item) => (
                     <span key={item} className="rounded-full bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700 ring-1 ring-slate-200">
                       {item}
                     </span>

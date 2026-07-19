@@ -42,7 +42,7 @@ const siteConfigs = {
     sectionLabel: '美妆护肤',
     eyebrow: '美妆护肤专区',
     heroTitle: '护肤 / 彩妆 / 香水 / 套装，美国本地好价精选',
-    description: '本区专注美妆护肤、彩妆、香水和套装好价。页面标注官网价，免税购买，色号和容量可加入清单后确认。',
+    description: '本区专注美妆护肤、彩妆、香水和套装好价。页面标价就是免税到手价，不再额外加税；色号和容量可加入清单后确认。',
     categories: ['全部', '护肤', '彩妆', '香水', '美发护理', '套装', '现货', '预订'],
     products: beautyProducts,
     pageClass: 'bg-[#fbfaf7]',
@@ -56,7 +56,7 @@ const siteConfigs = {
     sectionLabel: '电子产品',
     eyebrow: '电子数码专区',
     heroTitle: 'Apple / Dyson / Switch / 数码配件，本地好价先看这里',
-    description: '本区专注电子产品、数码配件和家用电器好价，商品主要通过美国本地渠道购入。页面标注官网价，免税购买，贵重商品建议当面验货。',
+    description: '本区专注电子产品、数码配件和家用电器好价，商品主要通过美国本地渠道购入。页面标价就是免税到手价，不再额外加税；贵重商品建议当面验货。',
     categories: ['全部', 'Apple', 'Dyson', 'Switch', '数码配件', '家用电器', '现货', '预订'],
     products: techProducts,
     pageClass: 'bg-[#f7f8fa]',
@@ -70,7 +70,7 @@ const siteConfigs = {
     sectionLabel: '日用百货',
     eyebrow: '日用百货专区',
     heroTitle: '饮料 / 零食 / 个护 / 清洁 / 纸品，本地顺手补货',
-    description: '本区提供饮料、零食、方便速食、个人护理、纸品和清洁用品。页面标注美国常见门店价，最终以当天采购清单确认为准。',
+    description: '本区提供饮料、零食、方便速食、个人护理、纸品和清洁用品。页面标价就是免税到手价；送货上门满 $60 起送，WashU 附近线下自提不限金额。',
     categories: ['全部', '饮料', '零食', '方便速食', '个人护理', '日用纸品', '洗衣清洁', '厨房清洁', '现货', '预订'],
     products: marketProducts,
     pageClass: 'bg-[#fafbf7]',
@@ -101,10 +101,10 @@ const getBrowserPath = (path) => {
 const hasUploadedImage = (product) => !String(product.image).includes('placehold.co');
 const getCartItemKey = (item) => item.cartId || item.id;
 const serviceBenefits = [
-  { title: '本地取货', description: 'WashU 附近线下自提', icon: PackageCheck },
-  { title: '送货上门', description: 'WashU 附近可送货', icon: Truck },
+  { title: '本地取货', description: 'WashU 附近自提不限金额', icon: PackageCheck },
+  { title: '送货上门', description: '日用百货满 $60 起送', icon: Truck },
   { title: '正品渠道', description: '美国本地渠道购入', icon: ShieldCheck },
-  { title: '免税到手', description: '标多少按多少结算', icon: WalletCards },
+  { title: '免税到手', description: '页面标价就是到手价', icon: WalletCards },
   { title: '官网价格', description: '按官网价整理购买', icon: BadgeDollarSign },
 ];
 const switch2Schema = {
@@ -320,7 +320,7 @@ export default function App() {
         if (items.length === 0) return '';
 
         const lines = items
-          .map((item, index) => `${index + 1}. ${item.brand} ${item.name}\n规格：${item.spec}\n官网免税价：${item.price}\n数量：${item.quantity}`)
+          .map((item, index) => `${index + 1}. ${item.brand} ${item.name}\n规格：${item.spec}\n免税到手价：${item.price}\n数量：${item.quantity}`)
           .join('\n\n');
 
         return `${title}\n${lines}`;
@@ -328,7 +328,7 @@ export default function App() {
       .filter(Boolean)
       .join('\n\n');
 
-    return `你好，我想购买以下商品，请帮我汇总购买和配送：\n\n${groupedText}\n\n取货方式：${pickupMethod}\n\n说明：网站标注的是官网价免税价，标多少按多少结算。\n\n我的微信：Lutissss`;
+    return `你好，我想购买以下商品，请帮我汇总购买和配送：\n\n${groupedText}\n\n取货方式：${pickupMethod}\n\n说明：页面标价就是免税到手价，不再额外加税。日用百货送货上门满 $60 起送，WashU 附近线下自提不限金额。\n\n我的微信：Lutissss`;
   }, [cartItems, pickupMethod]);
 
   const inquiryText =
@@ -430,10 +430,10 @@ export default function App() {
                   <p className="text-sm font-black uppercase tracking-normal text-slate-500">Nintendo</p>
                   <h1 className="mt-3 text-4xl font-black leading-tight text-slate-950 md:text-6xl">Nintendo Switch 2</h1>
                   <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">
-                    选择版本、配件和数量后加入购买清单。页面小计按官网价免税汇总，标多少按多少结算。
+                    选择版本、配件和数量后加入购买清单。页面标价就是免税到手价，不再额外加税。
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {['全新现货 / 可预订', '官网价免税', 'WashU 附近线下自提或送货上门'].map((tag) => (
+                    {['全新现货 / 可预订', '页面标价即免税到手价', 'WashU 附近线下自提或送货上门'].map((tag) => (
                       <span key={tag} className="rounded-full bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200">
                         {tag}
                       </span>
@@ -479,7 +479,7 @@ export default function App() {
                     {detailProduct.shortDescription}
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {['全新商品', '官网价免税', 'WashU 附近线下自提或送货上门'].map((tag) => (
+                    {['全新商品', '页面标价即免税到手价', 'WashU 附近线下自提或送货上门'].map((tag) => (
                       <span key={tag} className="rounded-full bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200">
                         {tag}
                       </span>

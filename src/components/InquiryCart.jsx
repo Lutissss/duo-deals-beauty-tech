@@ -131,6 +131,9 @@ export default function InquiryCart({
                     </button>
                   ))}
                 </div>
+                <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-xs font-semibold leading-5 text-emerald-900">
+                  页面标价就是免税到手价。日用百货送货上门满 $60 起送，WashU 附近线下自提不限金额。
+                </div>
               </div>
 
               <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">

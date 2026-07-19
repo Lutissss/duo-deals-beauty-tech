@@ -1,6 +1,11 @@
 import { AlertCircle } from 'lucide-react';
 
-const serviceNotes = ['WashU 附近线下自提或送货上门', '官网价免税', '标多少按多少结算', '选好后复制清单微信发送 Lutissss'];
+const serviceNotes = [
+  '页面标价就是免税到手价，不再额外加税',
+  '日用百货送货上门满 $60 起送',
+  'WashU 附近线下自提不限金额',
+  '选好后复制清单微信发送 Lutissss',
+];
 
 export default function Footer({ site }) {
   return (

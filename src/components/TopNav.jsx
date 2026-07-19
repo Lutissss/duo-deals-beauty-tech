@@ -1,4 +1,4 @@
-import { Home, MonitorSmartphone, Search, ShoppingBag, ShoppingBasket, Sparkles, X } from 'lucide-react';
+import { BadgeDollarSign, Home, MonitorSmartphone, Search, ShoppingBag, ShoppingBasket, Sparkles, Truck, X } from 'lucide-react';
 
 const navItems = [
   { label: '首页', path: '/', icon: Home },
@@ -11,8 +11,20 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
   const showSearch = route === '/beauty' || route === '/electronics' || route === '/market' || route.startsWith('/electronics/');
 
   return (
-    <nav className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 px-3 py-2 shadow-sm shadow-slate-200/40 backdrop-blur">
-      <div className="mx-auto max-w-7xl">
+    <nav className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 shadow-sm shadow-slate-200/40 backdrop-blur">
+      <div className="bg-slate-950 px-3 py-2 text-white">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-5 gap-y-1 text-center text-[11px] font-bold sm:text-xs">
+          <span className="inline-flex items-center gap-1.5">
+            <BadgeDollarSign className="h-4 w-4 text-emerald-400" />
+            页面标价就是免税到手价
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-slate-200">
+            <Truck className="h-4 w-4 text-emerald-400" />
+            日用百货送货上门满 $60 起送，自提不限金额
+          </span>
+        </div>
+      </div>
+      <div className="mx-auto max-w-7xl px-3 py-2">
         <div className="flex items-center gap-3">
           <button
             type="button"
