@@ -88,6 +88,7 @@ const getRouteFromLocation = () => {
   if (path === '/beauty' || path === '/beauty/') return '/beauty';
   if (path === '/electronics' || path === '/electronics/') return '/electronics';
   if (path === '/market' || path === '/market/') return '/market';
+  if (path === '/search' || path === '/search/') return '/search';
   const detailRoute = techProducts.find((product) => product.detailPath === path || `${product.detailPath}/` === path)?.detailPath;
   if (detailRoute) return detailRoute;
   return '/';
@@ -128,6 +129,17 @@ const switch2Schema = {
 };
 
 const allProducts = [...beautyProducts, ...techProducts, ...marketProducts];
+const searchSiteConfig = {
+  key: 'search',
+  path: '/search',
+  name: '全站搜索',
+  shortName: '商品',
+  section: 'Search',
+  sectionLabel: '全站商品',
+  categories: ['全部'],
+  products: allProducts,
+  pageClass: 'bg-[#fbfaf7]',
+};
 
 const getCurrentProductPrice = (item) =>
   allProducts.find((product) => product.id === item.id)?.price;
@@ -179,7 +191,16 @@ export default function App() {
 
   const isSwitch2Detail = route === '/electronics/switch-2';
   const currentSite =
-    route === '/beauty' ? siteConfigs.beauty : route === '/electronics' ? siteConfigs.electronics : route === '/market' ? siteConfigs.market : null;
+    route === '/beauty'
+      ? siteConfigs.beauty
+      : route === '/electronics'
+        ? siteConfigs.electronics
+        : route === '/market'
+          ? siteConfigs.market
+          : route === '/search'
+            ? searchSiteConfig
+            : null;
+  const isGlobalSearch = route === '/search' || Boolean(searchTerm.trim());
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const switch2Product = siteConfigs.electronics.products.find((product) => product.id === 'tech-switch-oled');
   const detailProduct = siteConfigs.electronics.products.find((product) => product.detailPath === route);
@@ -197,15 +218,19 @@ export default function App() {
     if (value.trim()) {
       setActiveCategory('全部');
       setActiveBrand('全部品牌');
+      if (route !== '/search') {
+        window.history.pushState({}, '', getBrowserPath('/search'));
+        setRoute('/search');
+      }
     }
   };
 
   const scrollToSearchResults = () => {
     const scroll = () => document.getElementById('product-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    if (route.startsWith('/electronics/')) {
-      window.history.pushState({}, '', getBrowserPath('/electronics'));
-      setRoute('/electronics');
+    if (searchTerm.trim() && route !== '/search') {
+      window.history.pushState({}, '', getBrowserPath('/search'));
+      setRoute('/search');
       setActiveCategory('全部');
       setActiveBrand('全部品牌');
       window.requestAnimationFrame(() => window.requestAnimationFrame(scroll));
@@ -260,7 +285,9 @@ export default function App() {
     if (!currentSite) return [];
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
-    return currentSite.products
+    const productsToFilter = isGlobalSearch ? allProducts : currentSite.products;
+
+    return productsToFilter
       .map((product, originalIndex) => ({ product, originalIndex }))
       .filter(({ product }) => {
         const searchableText = [
@@ -277,11 +304,12 @@ export default function App() {
           .toLowerCase();
 
         const matchesCategory =
+          isGlobalSearch ||
           activeCategory === '全部' ||
           product.category === activeCategory ||
           (activeCategory === '现货' && product.status === '现货') ||
           (activeCategory === '预订' && product.status === '预订');
-        const matchesBrand = activeBrand === '全部品牌' || product.brand === activeBrand;
+        const matchesBrand = isGlobalSearch || activeBrand === '全部品牌' || product.brand === activeBrand;
         const matchesSearch = !normalizedSearch || searchableText.includes(normalizedSearch);
 
         return matchesCategory && matchesBrand && matchesSearch;
@@ -293,7 +321,7 @@ export default function App() {
         return imageRank || a.originalIndex - b.originalIndex;
       })
       .map(({ product }) => product);
-  }, [activeBrand, activeCategory, currentSite, searchTerm]);
+  }, [activeBrand, activeCategory, currentSite, isGlobalSearch, searchTerm]);
 
   const displayProducts = useMemo(
     () => filteredProducts,
@@ -533,19 +561,23 @@ export default function App() {
         <SiteGateway onNavigate={navigate} />
       ) : (
         <div className={`min-h-screen ${currentSite.pageClass}`}>
-          <CategoryTabs categories={currentSite.categories} activeCategory={activeCategory} onChange={setActiveCategory} />
-          <Header site={currentSite} onNavigate={navigate} />
-          <BrandFilter brands={availableBrands} activeBrand={activeBrand} onChange={setActiveBrand} />
+          {!isGlobalSearch ? (
+            <>
+              <CategoryTabs categories={currentSite.categories} activeCategory={activeCategory} onChange={setActiveCategory} />
+              <Header site={currentSite} onNavigate={navigate} />
+              <BrandFilter brands={availableBrands} activeBrand={activeBrand} onChange={setActiveBrand} />
+            </>
+          ) : null}
 
           <main className={`${currentSite.pageClass} px-4 py-5 md:py-8`}>
             <section id="product-section" className="mx-auto max-w-7xl">
               <div className="mb-5 flex items-end justify-between gap-3">
                 <div>
                   <p className="text-sm font-bold text-slate-500">
-                    {searchTerm ? `正在搜索“${searchTerm}”` : '热门商品'}
+                    {isGlobalSearch ? `全站搜索“${searchTerm || '全部商品'}”` : '热门商品'}
                   </p>
                   <h2 className="text-2xl font-black leading-tight text-slate-950">
-                    {searchTerm ? `找到 ${displayedProductCount} 件商品` : `热门${currentSite.shortName}`}
+                    {isGlobalSearch ? `全站找到 ${displayedProductCount} 件商品` : `热门${currentSite.shortName}`}
                   </h2>
                 </div>
                 <p className="rounded-full bg-white px-3 py-1 text-sm font-bold text-slate-600 ring-1 ring-slate-200">
@@ -560,6 +592,7 @@ export default function App() {
                     <ProductCard
                       key={product.id}
                       product={product}
+                      showSection={isGlobalSearch}
                       onAddToCart={(item) => addToCart(item)}
                       onInquiry={(item) => addToCart(item, true)}
                       onViewDetails={navigate}
@@ -583,8 +616,8 @@ export default function App() {
                 </>
               ) : (
                 <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-10 text-center">
-                  <p className="font-semibold text-slate-900">暂时没有匹配的商品</p>
-                  <p className="mt-2 text-sm text-slate-500">可以换个关键词，或选择“全部”再看看。</p>
+                  <p className="font-semibold text-slate-900">全站暂时没有匹配的商品</p>
+                  <p className="mt-2 text-sm text-slate-500">可以换个商品名称、品牌或分类关键词再试一次。</p>
                 </div>
               )}
             </section>

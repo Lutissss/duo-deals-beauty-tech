@@ -17,7 +17,7 @@ export default function TopNav({
   onSearchChange,
   onSearchSubmit,
 }) {
-  const showSearch = route === '/beauty' || route === '/electronics' || route === '/market' || route.startsWith('/electronics/');
+  const showSearch = route === '/beauty' || route === '/electronics' || route === '/market' || route === '/search' || route.startsWith('/electronics/');
   const submitSearch = (event) => {
     event.preventDefault();
     onSearchSubmit?.();
@@ -82,7 +82,7 @@ export default function TopNav({
                 value={searchTerm}
                 onChange={(event) => onSearchChange?.(event.target.value)}
                 className="min-w-0 flex-1 bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-500"
-                placeholder="搜索商品、品牌、分类"
+                placeholder="全站搜索商品、品牌、分类"
                 type="search"
                 inputMode="search"
                 aria-label="搜索商品、品牌或分类"
@@ -159,7 +159,7 @@ export default function TopNav({
               value={searchTerm}
               onChange={(event) => onSearchChange?.(event.target.value)}
               className="min-w-0 flex-1 bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-500"
-              placeholder="搜索商品、品牌、分类"
+              placeholder="全站搜索商品、品牌、分类"
               type="search"
               inputMode="search"
               aria-label="搜索商品、品牌或分类"

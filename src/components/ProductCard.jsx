@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { ArrowRight, ShoppingBag } from 'lucide-react';
 import ProductImage from './ProductImage.jsx';
 
-export default function ProductCard({ product, onAddToCart, onInquiry, onViewDetails }) {
+export default function ProductCard({ product, showSection = false, onAddToCart, onInquiry, onViewDetails }) {
   const defaultOptions = useMemo(
     () =>
       Object.fromEntries(
@@ -32,6 +32,12 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
       : product.section === 'Market'
         ? 'from-[#f8fbf3] to-[#edf5e8]'
         : 'from-white to-[#eef3f7]';
+  const sectionClass =
+    product.section === 'Beauty'
+      ? 'bg-rose-50 text-rose-700'
+      : product.section === 'Market'
+        ? 'bg-emerald-50 text-emerald-700'
+        : 'bg-sky-50 text-sky-700';
   const imageContent = (
     <>
       <ProductImage
@@ -67,7 +73,14 @@ export default function ProductCard({ product, onAddToCart, onInquiry, onViewDet
 
       <div className="flex flex-1 flex-col space-y-2 p-3">
         <div className="flex items-center justify-between gap-1">
-          <span className="truncate rounded-md bg-slate-100 px-2 py-1 text-[10px] font-black text-slate-600">{product.brand}</span>
+          <div className="flex min-w-0 items-center gap-1">
+            {showSection ? (
+              <span className={`shrink-0 rounded-md px-1.5 py-1 text-[9px] font-black ${sectionClass}`}>
+                {product.sectionLabel}
+              </span>
+            ) : null}
+            <span className="truncate rounded-md bg-slate-100 px-2 py-1 text-[10px] font-black text-slate-600">{product.brand}</span>
+          </div>
           <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ring-1 ${statusClass}`}>{product.status}</span>
         </div>
 
