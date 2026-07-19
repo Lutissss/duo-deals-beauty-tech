@@ -192,6 +192,29 @@ export default function App() {
     setSearchTerm('');
   };
 
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
+    if (value.trim()) {
+      setActiveCategory('全部');
+      setActiveBrand('全部品牌');
+    }
+  };
+
+  const scrollToSearchResults = () => {
+    const scroll = () => document.getElementById('product-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (route.startsWith('/electronics/')) {
+      window.history.pushState({}, '', getBrowserPath('/electronics'));
+      setRoute('/electronics');
+      setActiveCategory('全部');
+      setActiveBrand('全部品牌');
+      window.requestAnimationFrame(() => window.requestAnimationFrame(scroll));
+      return;
+    }
+
+    scroll();
+  };
+
   useEffect(() => {
     const handleRouteChange = () => {
       setRoute(getRouteFromLocation());
@@ -409,7 +432,9 @@ export default function App() {
         onOpenCart={() => setIsCartOpen(true)}
         cartCount={cartCount}
         searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
+        searchResultCount={currentSite ? displayedProductCount : undefined}
+        onSearchChange={handleSearchChange}
+        onSearchSubmit={scrollToSearchResults}
       />
 
       {isSwitch2Detail ? (
@@ -516,9 +541,11 @@ export default function App() {
             <section id="product-section" className="mx-auto max-w-7xl">
               <div className="mb-5 flex items-end justify-between gap-3">
                 <div>
-                  <p className="text-sm font-bold text-slate-500">热门商品</p>
+                  <p className="text-sm font-bold text-slate-500">
+                    {searchTerm ? `正在搜索“${searchTerm}”` : '热门商品'}
+                  </p>
                   <h2 className="text-2xl font-black leading-tight text-slate-950">
-                    热门{currentSite.shortName}
+                    {searchTerm ? `找到 ${displayedProductCount} 件商品` : `热门${currentSite.shortName}`}
                   </h2>
                 </div>
                 <p className="rounded-full bg-white px-3 py-1 text-sm font-bold text-slate-600 ring-1 ring-slate-200">

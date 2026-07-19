@@ -7,8 +7,21 @@ const navItems = [
   { label: '日用百货', path: '/market', icon: ShoppingBasket },
 ];
 
-export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searchTerm = '', onSearchChange }) {
+export default function TopNav({
+  route,
+  onNavigate,
+  onOpenCart,
+  cartCount,
+  searchTerm = '',
+  searchResultCount,
+  onSearchChange,
+  onSearchSubmit,
+}) {
   const showSearch = route === '/beauty' || route === '/electronics' || route === '/market' || route.startsWith('/electronics/');
+  const submitSearch = (event) => {
+    event.preventDefault();
+    onSearchSubmit?.();
+  };
 
   return (
     <nav className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 shadow-sm shadow-slate-200/40 backdrop-blur">
@@ -59,7 +72,11 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
           </div>
 
           {showSearch ? (
-            <label className="ml-auto hidden h-12 min-w-0 max-w-md flex-1 items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-4 shadow-inner shadow-slate-200/40 focus-within:border-slate-400 md:flex">
+            <form
+              onSubmit={submitSearch}
+              className="ml-auto hidden h-12 min-w-0 max-w-md flex-1 items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 pl-4 pr-1 shadow-inner shadow-slate-200/40 focus-within:border-slate-400 md:flex"
+              role="search"
+            >
               <Search className="h-5 w-5 shrink-0 text-slate-500" />
               <input
                 value={searchTerm}
@@ -68,7 +85,11 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
                 placeholder="搜索商品、品牌、分类"
                 type="search"
                 inputMode="search"
+                aria-label="搜索商品、品牌或分类"
               />
+              {searchTerm && Number.isFinite(searchResultCount) ? (
+                <span className="shrink-0 text-xs font-bold text-slate-500">{searchResultCount} 件</span>
+              ) : null}
               {searchTerm ? (
                 <button
                   type="button"
@@ -79,7 +100,15 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
                   <X className="h-3.5 w-3.5" />
                 </button>
               ) : null}
-            </label>
+              <button
+                type="submit"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-950 text-white transition hover:bg-slate-800 active:scale-95"
+                aria-label="搜索"
+                title="搜索"
+              >
+                <Search className="h-4 w-4" />
+              </button>
+            </form>
           ) : (
             <div className="ml-auto" />
           )}
@@ -120,7 +149,11 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
         </div>
 
         {showSearch ? (
-          <label className="mt-2 flex h-11 items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 focus-within:border-slate-400 md:hidden">
+          <form
+            onSubmit={submitSearch}
+            className="mt-2 flex h-11 items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 pl-3 pr-1 focus-within:border-slate-400 md:hidden"
+            role="search"
+          >
             <Search className="h-4 w-4 shrink-0 text-slate-500" />
             <input
               value={searchTerm}
@@ -129,7 +162,11 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
               placeholder="搜索商品、品牌、分类"
               type="search"
               inputMode="search"
+              aria-label="搜索商品、品牌或分类"
             />
+            {searchTerm && Number.isFinite(searchResultCount) ? (
+              <span className="shrink-0 text-[11px] font-bold text-slate-500">{searchResultCount} 件</span>
+            ) : null}
             {searchTerm ? (
               <button
                 type="button"
@@ -140,7 +177,14 @@ export default function TopNav({ route, onNavigate, onOpenCart, cartCount, searc
                 <X className="h-3.5 w-3.5" />
               </button>
             ) : null}
-          </label>
+            <button
+              type="submit"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-950 text-white active:scale-95"
+              aria-label="搜索"
+            >
+              <Search className="h-4 w-4" />
+            </button>
+          </form>
         ) : null}
       </div>
     </nav>
